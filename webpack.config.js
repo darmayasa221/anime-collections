@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-  entry: './src/Index.tsx',
+  entry: './src/App.tsx',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -23,7 +23,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/Infrastructures/web/index.html',
     }),
     new ReactRefreshPlugin(),
   ],

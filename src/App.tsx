@@ -1,7 +1,6 @@
-export default function App() {
-  return (
-    <div>
-      <h1>hello world</h1>
-    </div>
-  );
-}
+import * as ReactDOM from 'react-dom/client';
+import Container from './Infrastructures/Container';
+
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+root.render(<Container />);
