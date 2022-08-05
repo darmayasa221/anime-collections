@@ -5,5 +5,5 @@ module.exports = {
     '@babel/preset-typescript',
     '@emotion/babel-preset-css-prop',
   ],
-  plugins: [process.env.NODE_ENV !== 'production' && require.resolve('react-refresh/babel')].filter(Boolean),
+  plugins: [(process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') && require.resolve('react-refresh/babel')].filter(Boolean),
 };

@@ -7,7 +7,7 @@
     "start": "webpack server",
     "satrt:watch": "webpack --watch",
     "build": "NODE_ENV=production webpack",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
