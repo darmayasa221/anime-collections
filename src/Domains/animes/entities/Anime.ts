@@ -1,5 +1,24 @@
-interface iAnime {
-  id: string;
+export interface iAnimeCoverImage {
+  coverImage: {
+    color: string;
+    extraLarge: string;
+    large: string;
+    medium: string;
+  };
+}
+export interface iAnimeTitle {
+  title: {
+    [keyof: string]: string;
+    romaji: string;
+    english: string;
+    native: string;
+    userPreferred: string;
+  };
+}
+export interface iAnime extends iAnimeCoverImage, iAnimeTitle {
+  id: number;
+}
+export interface iAnimed extends Omit<iAnime, 'coverImage'> {
   coverImage: {
     color: string;
     size: {
@@ -8,22 +27,47 @@ interface iAnime {
       medium: string;
     };
   };
-  title: object;
 }
 
-export default class Anime implements iAnime {
-  public id: string;
+export default class Anime implements iAnimed {
+  public id: number;
 
   public coverImage: {
     color: string;
     size: { extraLarge: string; large: string; medium: string };
   };
 
-  public title: object;
+  public title: {
+    romaji: string;
+    english: string;
+    native: string;
+    userPreferred: string;
+  };
 
   constructor(payload: iAnime) {
-    this.id = payload.id;
-    this.coverImage = payload.coverImage;
-    this.title = payload.title;
+    const { id, title, coverImage }: iAnimed = this.verifyPayload(payload);
+    this.id = id;
+    this.coverImage = coverImage;
+    this.title = title;
+  }
+
+  private verifyPayload(payload: iAnime): iAnimed {
+    return {
+      id: payload.id,
+      coverImage: {
+        color: payload.coverImage.color ? payload.coverImage.color : 'white',
+        size: {
+          extraLarge: payload.coverImage.extraLarge,
+          large: payload.coverImage.large,
+          medium: payload.coverImage.medium,
+        },
+      },
+      title: {
+        english: payload.title.english,
+        native: payload.title.native,
+        romaji: payload.title.romaji,
+        userPreferred: payload.title.userPreferred,
+      },
+    };
   }
 }
