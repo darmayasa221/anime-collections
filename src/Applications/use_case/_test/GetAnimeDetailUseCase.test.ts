@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable comma-dangle */
 import GetAnimeDetailUseCase from '../GetAnimeDetailUseCase';
 import AnimeRepository from '../../../Domains/animes/AnimeRepository';
 import DispatcherAnime from '../../dispatcher/DispatcherAnime';
@@ -35,12 +37,12 @@ describe('GetAnimeDetailUseCase', () => {
       averageScore: 82,
     });
     // mocking
-    const mockAnimeRepository: AnimeRepository = {
+    const mockAnimeRepository: Pick<AnimeRepository, 'getAnimeById'> = {
       getAnimeById: jest
         .fn()
         .mockImplementation(() => Promise.resolve(expectedPayload)),
     };
-    const mockDispatcherAnime: DispatcherAnime = {
+    const mockDispatcherAnime: Pick<DispatcherAnime, 'setAnimeDetail'> = {
       setAnimeDetail: jest.fn().mockImplementation(() => {}),
     };
     const mockDispatcherError: DispatcherError = {
@@ -62,7 +64,7 @@ describe('GetAnimeDetailUseCase', () => {
     // Assert
     expect(mockAnimeRepository.getAnimeById).toBeCalledWith(payload);
     expect(mockDispatcherAnime.setAnimeDetail).toBeCalledWith(expectedPayload);
-    expect(mockDispatcherError.setError).toBeCalledTimes(0);
+    expect(mockDispatcherError.setError).not.toHaveBeenCalled();
     expect(mockDispatcherNotification.setNotification).toBeCalledWith({
       error: false,
     });
