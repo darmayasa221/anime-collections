@@ -19,7 +19,9 @@
     "react/react-in-jsx-scope": "off",
     "import/extensions": "off",
     "react/jsx-filename-extension": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-unused-expressions": "off",
+    "class-methods-use-this": "off"
   },
   "ignorePatterns": ["dist"]
 }
