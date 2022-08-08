@@ -44,7 +44,7 @@ describe('anime entities', () => {
     // Action
     const anime = new Anime(payload);
     // Assert
-    expect(anime).toStrictEqual(expectedPayload);
+    expect({ ...anime }).toStrictEqual(expectedPayload);
   });
   it('should create default value if payload did not contain property', () => {
     // Arrange
@@ -87,9 +87,9 @@ describe('anime entities', () => {
       },
     };
     // Action
-    const anime = new Anime(payload);
+    const anime = new Anime(payload as any);
     // Assert
-    expect(anime).toStrictEqual(expectedPayload);
+    expect({ ...anime }).toStrictEqual(expectedPayload);
     expect(anime.title.romaji).toEqual(expectedPayload.title.romaji);
     expect(anime.coverImage.color).toEqual(expectedPayload.coverImage.color);
   });
