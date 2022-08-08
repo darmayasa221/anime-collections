@@ -3,23 +3,22 @@ import AnimeRepository from '../../../Domains/animes/AnimeRepository';
 import DispatcherAnime from '../../dispatcher/DispatcherAnime';
 import DispatcherError from '../../dispatcher/DispatcherError';
 import DispatcherNotification from '../../dispatcher/DispatcherNotification';
+import AnimeDetail from '../../../Domains/animes/entities/AnimeDetail';
 
 describe('GetAnimeDetailUseCase', () => {
   it('should orchestrating the GetAnimeDetail action correctly', async () => {
     // Arrange
     const payload = 1;
-    const expectedValueAnimeById = {
+    const expectedPayload = new AnimeDetail({
       id: 5,
       coverImage: {
+        extraLarge:
+          'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx5-NozHwXWdNLCz.jpg',
+        large:
+          'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx5-NozHwXWdNLCz.jpg',
+        medium:
+          'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx5-NozHwXWdNLCz.jpg',
         color: '#f13500',
-        size: {
-          extraLarge:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx5-NozHwXWdNLCz.jpg',
-          large:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx5-NozHwXWdNLCz.jpg',
-          medium:
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/small/bx5-NozHwXWdNLCz.jpg',
-        },
       },
       title: {
         romaji: 'Cowboy Bebop: Tengoku no Tobira',
@@ -34,14 +33,12 @@ describe('GetAnimeDetailUseCase', () => {
       episodes: 1,
       genres: ['Action', 'Drama', 'Mystery', 'Sci-Fi'],
       averageScore: 82,
-    };
+    });
     // mocking
     const mockAnimeRepository: AnimeRepository = {
       getAnimeById: jest
         .fn()
-        .mockImplementation(() =>
-          Promise.resolve({ ...expectedValueAnimeById })
-        ),
+        .mockImplementation(() => Promise.resolve(expectedPayload)),
     };
     const mockDispatcherAnime: DispatcherAnime = {
       setAnimeDetail: jest.fn().mockImplementation(() => {}),
@@ -64,9 +61,7 @@ describe('GetAnimeDetailUseCase', () => {
     await getAnimeDetailUseCase.execute(payload);
     // Assert
     expect(mockAnimeRepository.getAnimeById).toBeCalledWith(payload);
-    expect(mockDispatcherAnime.mockDispatcherAnime).toBeCalledWith({
-      ...expectedValueAnimeById,
-    });
+    expect(mockDispatcherAnime.setAnimeDetail).toBeCalledWith(expectedPayload);
     expect(mockDispatcherError.setError).toBeCalledTimes(0);
     expect(mockDispatcherNotification.setNotification).toBeCalledWith({
       error: false,

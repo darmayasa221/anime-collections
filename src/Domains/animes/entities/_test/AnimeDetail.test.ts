@@ -58,7 +58,7 @@ describe('AnimeDetail Entities', () => {
     // Action
     const animeDetail = new AnimeDetail(payload);
     // Assert
-    expect(animeDetail).toStrictEqual(expectedPayload);
+    expect({ ...animeDetail }).toStrictEqual(expectedPayload);
   });
   it('shuld create default value if payload did not contain property', () => {
     // Arrange
@@ -115,9 +115,9 @@ describe('AnimeDetail Entities', () => {
       averageScore: 82,
     };
     // Action
-    const animeDetail = new AnimeDetail(payload);
+    const animeDetail = new AnimeDetail(payload as any);
     // Assert
-    expect(animeDetail).toStrictEqual(expectedPayload);
+    expect({ ...animeDetail }).toStrictEqual(expectedPayload);
     expect(animeDetail.title.romaji).toEqual(expectedPayload.title.romaji);
     expect(animeDetail.coverImage.color).toEqual(
       expectedPayload.coverImage.color
