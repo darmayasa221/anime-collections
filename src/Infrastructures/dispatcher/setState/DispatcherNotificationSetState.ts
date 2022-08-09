@@ -1,14 +1,15 @@
 import DispatcherNotification from '../../../Applications/dispatcher/DispatcherNotification';
+import { dispatchersObject } from '../../../Interface/web/dispatcherAdapter/DispatcherAdapter';
 
 export default class DispatcherNotificationSetState extends DispatcherNotification {
-  private dispatch: any;
+  private dispatch: dispatchersObject;
 
-  constructor(dispatch: any) {
+  constructor(dispatch: dispatchersObject) {
     super();
     this.dispatch = dispatch;
   }
 
-  setNotification(errors: object): Error {
-    console.log('nottif');
+  setNotification(errors: object): void {
+
   }
 }

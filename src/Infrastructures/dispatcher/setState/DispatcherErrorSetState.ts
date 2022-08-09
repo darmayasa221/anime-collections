@@ -1,14 +1,15 @@
 import DispatcherError from '../../../Applications/dispatcher/DispatcherError';
+import { dispatchersObject } from '../../../Interface/web/dispatcherAdapter/DispatcherAdapter';
 
 export default class DispatcherErrorSetState extends DispatcherError {
-  private dispatch: any;
+  private dispatch: dispatchersObject;
 
-  constructor(dispatch: any) {
+  constructor(dispatch: dispatchersObject) {
     super();
     this.dispatch = dispatch;
   }
 
-  setError(error: string): Error {
+  setError(error: string): void {
     console.log('error');
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable comma-dangle */
 import { iAnimesRepository } from '../../Domains/animes/AnimeRepository';
 import { iDispatcherAnime } from '../dispatcher/DispatcherAnime';
 import { iDispatcherError } from '../dispatcher/DispatcherError';
@@ -21,7 +20,7 @@ export default class GetAnimesUseCase implements iGetAnimesUseCase {
     animeRepository: Pick<iAnimesRepository, 'getAnimes'>,
     dispatcherAnime: Pick<iDispatcherAnime, 'setAnimes'>,
     dispatcherNotification: iDispatcherNotification,
-    dispatcherError: iDispatcherError
+    dispatcherError: iDispatcherError,
   ) {
     this.animeRepository = animeRepository;
     this.dispatcherAnime = dispatcherAnime;

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 
 type props = {
@@ -12,7 +11,10 @@ export default function AnimeTitle({ title, titleDescription }: props) {
         <p>{title}</p>
       </section>
       <section>
-        <p>: {titleDescription}</p>
+        <p>
+          :
+          {titleDescription}
+        </p>
       </section>
     </>
   );

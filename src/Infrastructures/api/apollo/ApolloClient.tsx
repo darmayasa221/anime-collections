@@ -1,7 +1,8 @@
-/* eslint-disable object-curly-newline */
 /* istanbul ignore file */
 import fetch from 'cross-fetch';
-import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client';
+import {
+  ApolloClient, InMemoryCache, gql, HttpLink,
+} from '@apollo/client';
 
 const httpLinkTest = new HttpLink({
   uri: 'https://graphql.anilist.co',
