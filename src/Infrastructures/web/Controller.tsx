@@ -22,6 +22,8 @@ export default function Controller() {
             padding: 0,
           },
           '#root': {
+            position: 'relative',
+            overflowX: 'hidden',
             display: 'flex',
             minHeight: '100vh',
             flexDirection: 'column',

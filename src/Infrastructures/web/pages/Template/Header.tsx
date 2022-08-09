@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import NavBar from '../../../../Interface/web/components/NavBar/NavBar';
 import HumbergerToggel from '../../../../Interface/web/components/UI/HumbergerToggle';
+import Notification from '../../../../Interface/web/components/UI/Notification';
+import { NotificationContext } from '../../../store/NotificationsContex';
 
 const HeaderApp = styled('header')({
   position: 'sticky',
@@ -26,16 +28,30 @@ const HeaderApp = styled('header')({
 
 export default function Header() {
   const [mode, setMode] = useState(false);
+  const {
+    errorMessage, isNotif, notificationMessage, status,
+  } = useContext(NotificationContext);
   const TogelMenuHandler = () => {
     mode === true ? setMode(false) : setMode(true);
   };
+  useEffect(() => {
+    status === 'error' && console.warn(status);
+  }, [status]);
   return (
-    <HeaderApp>
-      <span>
-        <h1>Anime Collection</h1>
-      </span>
-      <HumbergerToggel TogelMenuHandler={TogelMenuHandler} mode={mode} />
-      <NavBar mode={mode} />
-    </HeaderApp>
+    <>
+      <HeaderApp>
+        <span>
+          <h1>Anime Collection</h1>
+        </span>
+        <HumbergerToggel TogelMenuHandler={TogelMenuHandler} mode={mode} />
+        <NavBar mode={mode} />
+      </HeaderApp>
+      <Notification
+        notificationMessage={notificationMessage}
+        isNotif={isNotif}
+        status={status}
+        errorMessage={errorMessage}
+      />
+    </>
   );
 }

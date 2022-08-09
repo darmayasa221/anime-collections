@@ -9,7 +9,20 @@ export default class DispatcherErrorSetState extends DispatcherError {
     this.dispatch = dispatch;
   }
 
-  setError(error: string): void {
-    console.log('error');
+  setError(error: any): void {
+    if (error) {
+      setTimeout(() => {
+        this.dispatch.setError((prev) => ({
+          ...prev,
+          isError: false,
+          errorMessage: '',
+        }));
+      }, 3000);
+      this.dispatch.setError((prev) => ({
+        ...prev,
+        isError: false,
+        errorMessage: error.message,
+      }));
+    }
   }
 }

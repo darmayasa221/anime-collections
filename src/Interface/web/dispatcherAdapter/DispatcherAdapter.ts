@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable operator-linebreak */
+import { isArray } from '@apollo/client/cache/inmemory/helpers';
 import { setAnimeDetailDispatchType } from '../models/AnimeDetail';
 import { setAnimesDispatchType } from '../models/Animes';
 import { setErrorDispatchType } from '../models/Error';
@@ -15,7 +14,7 @@ export type dispatchersObject = {
 
 export type setDispathcerType = (dispatcher: {
   [x: string]: (callback: (prev: any) => any) => void;
-}) => void;
+}| Array<{[x: string]: (callback: (prev: any) => any) => void}>) => void;
 export interface iDispatcherAdapter {
   dispatchers: dispatchersObject;
   setDispatcher: setDispathcerType;
@@ -29,9 +28,15 @@ const DispatcherAdapter: iDispatcherAdapter = {
     setNotification() {},
   },
   setDispatcher(dispatcher) {
-    const namePropertyDispatcher = Object.getOwnPropertyNames(dispatcher)[0];
-    DispatcherAdapter.dispatchers[namePropertyDispatcher] =
-      dispatcher[namePropertyDispatcher];
+    if (!isArray(dispatcher)) {
+      const namePropertyDispatcher = Object.getOwnPropertyNames(dispatcher)[0];
+      DispatcherAdapter.dispatchers[namePropertyDispatcher] = dispatcher[namePropertyDispatcher];
+    } else {
+      dispatcher.forEach((dispatch) => {
+        const namePropertyDispatcher = Object.getOwnPropertyNames(dispatch)[0];
+        DispatcherAdapter.dispatchers[namePropertyDispatcher] = dispatch[namePropertyDispatcher];
+      });
+    }
   },
 };
 

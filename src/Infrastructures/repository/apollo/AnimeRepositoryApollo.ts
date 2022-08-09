@@ -49,7 +49,7 @@ export default class AnimeRepositoryApollo extends AnimeRepository {
     if (typeof id !== 'number') {
       throw new Error('id not found');
     }
-    const { data, error } = await this.client.query({
+    const { data, error, networkStatus } = await this.client.query({
       query: this.gqlQuery(`
       query anime($id:Int){
         Media(id: $id, type: ANIME) {

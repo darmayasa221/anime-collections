@@ -9,7 +9,37 @@ export default class DispatcherNotificationSetState extends DispatcherNotificati
     this.dispatch = dispatch;
   }
 
-  setNotification(errors: object): void {
-
+  setNotification({ error }:{error:boolean}): void {
+    if (!error) {
+      setTimeout(() => {
+        this.dispatch.setNotification((prev) => ({
+          ...prev,
+          isNotif: false,
+          status: 'none',
+          notificationMessage: '',
+        }));
+      }, 3000);
+      this.dispatch.setNotification((prev) => ({
+        ...prev,
+        isNotif: true,
+        status: 'success',
+        notificationMessage: 'success to display this pages',
+      }));
+    } else {
+      setTimeout(() => {
+        this.dispatch.setNotification((prev) => ({
+          ...prev,
+          isNotif: false,
+          status: 'none',
+          notificationMessage: '',
+        }));
+      }, 3000);
+      this.dispatch.setNotification((prev) => ({
+        ...prev,
+        isNotif: true,
+        status: 'error',
+        notificationMessage: '',
+      }));
+    }
   }
 }
