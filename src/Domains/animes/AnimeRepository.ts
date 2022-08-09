@@ -8,7 +8,7 @@ export default abstract class AnimeRepository implements iAnimesRepository {
     throw new Error('ANIME_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async getAnimeById(id: number): Promise<Error> {
+  async getAnimeById(id: number): Promise<any> {
     throw new Error('ANIME_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 }

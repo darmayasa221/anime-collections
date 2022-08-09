@@ -7,7 +7,7 @@ export interface iDispatcherNotification {
 export default abstract class DispatcherNotification
   implements iDispatcherNotification
 {
-  setNotification(errors: object): Error {
+  setNotification(errors: object): any {
     throw new Error('DISPATCHER_NOTIFICATION.METHOD_NOT_IMPELEMENTED');
   }
 }

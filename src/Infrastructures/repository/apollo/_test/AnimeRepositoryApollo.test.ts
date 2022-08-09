@@ -1,6 +1,7 @@
 import AnimeRepositoryApollo from '../AnimeRepositoryApollo';
 import { apolloClient, gql } from '../../../api/apollo/ApolloClient';
 import AnimeGqlTestHelper from '../../../../../tests/AnimeGqlTestHelper';
+import AnimeDetail from '../../../../Domains/animes/entities/AnimeDetail';
 
 describe('AnimeRepositoryApollo', () => {
   describe('getAnimes', () => {
@@ -8,15 +9,15 @@ describe('AnimeRepositoryApollo', () => {
       // Arrange
       const animeRepository = new AnimeRepositoryApollo(apolloClient, gql);
       // Action
-      const animes = await animeRepository.getAnimes();
+      const { data } = await animeRepository.getAnimes();
       // Assert
-      expect(animes).toHaveLength(10);
+      expect(data).toHaveLength(10);
     });
     it('should throw error when get an error from server', async () => {
       // Arrange
       const animeRepository = new AnimeRepositoryApollo({} as any, gql);
       // action and Assert
-      expect(() => animeRepository.getAnimes()).rejects.toThrowError(Error);
+      expect(() => animeRepository.getAnimes()).rejects.toThrow(Error);
     });
   });
   describe('getAnimeById', () => {
@@ -27,15 +28,13 @@ describe('AnimeRepositoryApollo', () => {
       // Action
       const animes = await animeRepository.getAnimeById(payload);
       // Assert
-      expect(animes).toStrictEqual(animeDetail.Media);
+      expect(animes).toStrictEqual(new AnimeDetail(animeDetail.Media));
     });
     it('should throw error when payload did not a number', async () => {
       const payload = 'string';
       const animeRepository = new AnimeRepositoryApollo(apolloClient, gql);
       // Action and Assert
-      expect(() => animeRepository.getAnimeById(payload)).rejects.toThrowError(
-        Error
-      );
+      expect(() => animeRepository.getAnimeById(payload as any)).rejects.toThrow(Error);
     });
     it('should throw error when get an error from server', async () => {
       // Arrange

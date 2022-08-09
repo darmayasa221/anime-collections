@@ -4,7 +4,7 @@ export interface iDispatcherError {
 }
 
 export default abstract class DispatcherError implements iDispatcherError {
-  setError(error: string): Error {
+  setError(error: string): any {
     throw new Error('DISPATCHER_ERROR.METHOD_NOT_IMPLEMENTED');
   }
 }

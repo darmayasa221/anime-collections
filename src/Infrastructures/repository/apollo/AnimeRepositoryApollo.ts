@@ -1,4 +1,6 @@
 import AnimeRepository from '../../../Domains/animes/AnimeRepository';
+import AnimeDetail from '../../../Domains/animes/entities/AnimeDetail';
+import Animes from '../../../Domains/animes/entities/Animes';
 import { apolloClient, gql } from '../../api/apollo/ApolloClient';
 
 export default class AnimeRepositoryApollo extends AnimeRepository {
@@ -13,7 +15,7 @@ export default class AnimeRepositoryApollo extends AnimeRepository {
   }
 
   async getAnimes(): Promise<any> {
-    const { data } = await this.client.query({
+    const { data, error } = await this.client.query({
       query: this.gqlQuery(`
        {
         Page(perPage: 10) {
@@ -37,8 +39,10 @@ export default class AnimeRepositoryApollo extends AnimeRepository {
       }
       `),
     });
-
-    return data.Page.media;
+    if (error) {
+      throw new Error(error.message);
+    }
+    return new Animes(data.Page);
   }
 
   async getAnimeById(id: number): Promise<any> {
@@ -75,6 +79,6 @@ export default class AnimeRepositoryApollo extends AnimeRepository {
     if (error) {
       throw new Error(error.message);
     }
-    return data.Media;
+    return new AnimeDetail(data.Media);
   }
 }

@@ -7,11 +7,11 @@ export interface iDispatcherAnime {
   setAnimes(payload: iAnimesed): void;
 }
 export default abstract class DispatcherAnime implements iDispatcherAnime {
-  setAnimeDetail(payload: iAnimedDetail): Error {
+  setAnimeDetail(payload: iAnimedDetail): any {
     throw new Error('DISPATCHER_ANIME.METHOD_NOT_IMPLEMENTED');
   }
 
-  setAnimes(payload: iAnimesed): Error {
+  setAnimes(payload: iAnimesed): any {
     throw new Error('DISPATCHER_ANIME.METHOD_NOT_IMPLEMENTED');
   }
 }

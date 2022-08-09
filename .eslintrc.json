@@ -21,7 +21,10 @@
     "react/jsx-filename-extension": "off",
     "import/no-extraneous-dependencies": "off",
     "no-unused-expressions": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "comma-dangle": "off",
+    "no-unused-vars": "off",
+    "operator-linebreak": "off"
   },
   "ignorePatterns": ["dist"]
 }
