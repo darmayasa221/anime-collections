@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 import GetAnimesUseCase from '../GetAnimesUseCase';
 import AnimeRepository from '../../../Domains/animes/AnimeRepository';
 import DispatcherAnime from '../../dispatcher/DispatcherAnime';
@@ -49,12 +50,12 @@ describe('GetAnimesUseCase', () => {
       ],
     });
     // mocking
-    const mockAnimeRepository: AnimeRepository = {
+    const mockAnimeRepository: Pick<AnimeRepository, 'getAnimes'> = {
       getAnimes: jest
         .fn()
         .mockImplementation(() => Promise.resolve(expectedAnimesValue)),
     };
-    const mockDispatcherAnime: DispatcherAnime = {
+    const mockDispatcherAnime: Pick<DispatcherAnime, 'setAnimes'> = {
       setAnimes: jest.fn().mockImplementation(() => {}),
     };
     const mockDispatcherError: DispatcherError = {
@@ -73,9 +74,9 @@ describe('GetAnimesUseCase', () => {
     // Action
     await getAnimesUseCase.execute();
     // Assert
-    expect(mockAnimeRepository.getAnimes).toBeCalledWithTimes(1);
+    expect(mockAnimeRepository.getAnimes).toHaveBeenCalled();
     expect(mockDispatcherAnime.setAnimes).toBeCalledWith(expectedAnimesValue);
-    expect(mockDispatcherError.setError).toBeCalledTimes(0);
+    expect(mockDispatcherError.setError).not.toHaveBeenCalled();
     expect(mockDispatcherNotification.setNotification).toBeCalledWith({
       error: false,
     });

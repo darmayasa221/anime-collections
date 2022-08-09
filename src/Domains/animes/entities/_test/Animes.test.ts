@@ -90,6 +90,6 @@ describe('Animes Entities', () => {
     // Action
     const animesData = new Animes(payload);
     // Assert
-    expect(animesData).toStrictEqual(expectedPayload);
+    expect({ ...animesData }).toStrictEqual(expectedPayload);
   });
 });

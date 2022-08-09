@@ -1,9 +1,20 @@
+/* eslint-disable object-curly-newline */
 /* istanbul ignore file */
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import fetch from 'cross-fetch';
+import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client';
+
+const httpLinkTest = new HttpLink({
+  uri: 'https://graphql.anilist.co',
+  fetch,
+});
+const httpLink = new HttpLink({
+  uri: 'https://graphql.anilist.co',
+  fetch,
+});
 
 const apolloClient = new ApolloClient({
-  uri: 'https://graphql.anilist.co',
+  link: process.env.NODE_ENV === 'test' ? httpLinkTest : httpLink,
   cache: new InMemoryCache(),
 });
 
-export { apolloClient, gql, ApolloClient };
+export { apolloClient, gql };

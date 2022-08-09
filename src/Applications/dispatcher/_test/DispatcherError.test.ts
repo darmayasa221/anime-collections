@@ -6,7 +6,7 @@ describe('DispatcherError', () => {
     class DummyDispatcher extends DispatcherError {}
     const dummyDispatcher = new DummyDispatcher();
     // Action and Assert
-    expect(dummyDispatcher.setError({})).toThrowError(
+    expect(() => dummyDispatcher.setError('')).toThrowError(
       'DISPATCHER_ERROR.METHOD_NOT_IMPLEMENTED'
     );
   });
