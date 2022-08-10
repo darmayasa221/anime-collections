@@ -1,5 +1,6 @@
 /* eslint-disable react/require-default-props */
 import styled from '@emotion/styled';
+import { FormEvent } from 'react';
 import { iAnimed } from '../../../../Domains/animes/entities/Anime';
 
 type props = {
@@ -20,7 +21,7 @@ const ButtotWrap = styled('div')({
   },
 });
 export default function Button({ text, anime, handlerData }: props) {
-  const onClickHandler = (event: { preventDefault: () => void; }) => {
+  const onClickHandler = (event: FormEvent) => {
     event.preventDefault();
     if (handlerData !== undefined) {
       handlerData(anime);

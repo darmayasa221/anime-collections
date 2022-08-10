@@ -4,7 +4,7 @@ import { setNotificationDispatchType } from '../../models/Notification';
 
 export default function NotificationAction(
   dispatch: setNotificationDispatchType,
-  dispactAdapter: setDispathcerType
+  dispactAdapter: setDispathcerType,
 ) {
   dispactAdapter({ setNotification: dispatch });
 }

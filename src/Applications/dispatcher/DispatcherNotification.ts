@@ -1,9 +1,15 @@
+export type iDispatcherNotificationInitial = {
+  type?: 'none' | 'addCollectionItem'| 'addCollection' | 'getAnimeDetail' | 'getAnimes'
+  error?: boolean,
+  message?: string,
+}
+
 export interface iDispatcherNotification {
-  setNotification({ error, message }:{error?:boolean, message?: string}): void;
+  setNotification(payload: iDispatcherNotificationInitial): void;
 }
 export default abstract class DispatcherNotification
 implements iDispatcherNotification {
-  setNotification({ error, message }:{error?:boolean, message?: string}): any {
+  setNotification(payload: iDispatcherNotificationInitial): any {
     throw new Error('DISPATCHER_NOTIFICATION.METHOD_NOT_IMPELEMENTED');
   }
 }

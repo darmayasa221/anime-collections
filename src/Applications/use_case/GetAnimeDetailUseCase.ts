@@ -16,6 +16,10 @@ export default class GetAnimeDetailUseCase implements iGetAnimeDetailUseCase {
 
   private dispatcherError: iDispatcherError;
 
+  private isError: boolean;
+
+  private message: string | undefined;
+
   constructor(
     animeRepository: Pick<iAnimesRepository, 'getAnimeById'>,
     dispatcherAnime: Pick<iDispatcherAnime, 'setAnimeDetail'>,
@@ -26,18 +30,19 @@ export default class GetAnimeDetailUseCase implements iGetAnimeDetailUseCase {
     this.dispatcherAnime = dispatcherAnime;
     this.dispatcherNotification = dispatcherNotification;
     this.dispatcherError = dispatcherError;
+    this.isError = false;
+    this.message;
   }
 
   async execute(payload: number): Promise<void> {
-    let isError = false;
     try {
       const anime = await this.animeRepository.getAnimeById(payload);
       this.dispatcherAnime.setAnimeDetail({ ...anime });
     } catch (error) {
-      isError = true;
+      this.isError = true;
       this.dispatcherError.setError(error as any);
     } finally {
-      this.dispatcherNotification.setNotification({ error: isError });
+      this.dispatcherNotification.setNotification({ error: this.isError, type: 'getAnimeDetail' });
     }
   }
 }

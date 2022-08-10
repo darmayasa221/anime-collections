@@ -4,7 +4,7 @@ import AnimeList from '../../../../Interface/web/components/Anime/AnimeList';
 import AnimesAction from '../../../../Interface/web/controllers/Animes';
 import CollectionAction from '../../../../Interface/web/controllers/Collection';
 import AnimesUseState from '../../../../Interface/web/models/Animes';
-import CollectionChartUseState from '../../../../Interface/web/models/CollectionChart';
+import CollectionChartUseState from '../../../../Interface/web/models/CollectionAnime';
 import ContainerContex from '../../../store/ContainerContex';
 
 export default function AnimePage() {
@@ -19,7 +19,6 @@ export default function AnimePage() {
   const addAnimeCollectionHandler = (data: iAnimed) => {
     addAnimeToCollectionAction(data);
   };
-  console.log(collectionChart);
   useEffect(() => {
     animes.isLoading && AnimesAction(getAnimesUseCase, setAnimes, setDispatcher);
   }, [animes.isLoading]);

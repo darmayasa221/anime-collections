@@ -37,7 +37,7 @@ export default class GetAnimesUseCase implements iGetAnimesUseCase {
       isError = true;
       this.dispatcherError.setError(error as string);
     } finally {
-      this.dispatcherNotification.setNotification({ error: isError });
+      this.dispatcherNotification.setNotification({ error: isError, type: 'getAnimes' });
     }
   }
 }

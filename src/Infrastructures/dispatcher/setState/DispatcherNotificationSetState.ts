@@ -3,10 +3,12 @@ import { dispatchersObject } from '../../../Interface/web/dispatcherAdapter/Disp
 
 export default class DispatcherNotificationSetState extends DispatcherNotification {
   private dispatch: dispatchersObject;
+  // private message: string
 
   constructor(dispatch: dispatchersObject) {
     super();
     this.dispatch = dispatch;
+    // this.message
   }
 
   setNotification({ error, message }:{error?:boolean, message?: string}): void {
