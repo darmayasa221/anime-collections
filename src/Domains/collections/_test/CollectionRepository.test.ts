@@ -15,5 +15,11 @@ describe('CollectionRepository', () => {
     expect(() => dumyRepository.editCollection({} as any)).toThrowError(
       'COLLECTION_REPOSITORY.METHOD_NOT_IMLEMENTED',
     );
+    expect(() => dumyRepository.getCollections()).toThrowError(
+      'COLLECTION_REPOSITORY.METHOD_NOT_IMLEMENTED',
+    );
+    expect(() => dumyRepository.getCollectionDetail({} as any)).toThrowError(
+      'COLLECTION_REPOSITORY.METHOD_NOT_IMLEMENTED',
+    );
   });
 });

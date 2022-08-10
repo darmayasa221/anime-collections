@@ -8,6 +8,7 @@ import { iDispatcherNotification } from '../dispatcher/DispatcherNotification';
 export interface iCollectionUseCase {
   addAnimeToCollection(payload: iAnimed): void
   addCollection({ nameCollection }:iCollectionItem): void
+  getCollections():void
 }
 export default class CollectionUseCase implements iCollectionUseCase {
   private dispatcherCollection: iDispatcherCollection;
@@ -54,6 +55,17 @@ export default class CollectionUseCase implements iCollectionUseCase {
       this.collectionRepository.addCollection(newCollection);
       this.dispatcherCollection.setCollection(newCollection);
       this.message = payload.nameCollection;
+    } catch (error) {
+      this.isError = true;
+      this.dispatcherError.setError(error as any);
+    } finally {
+      this.dispatcherNotification.setNotification({ error: this.isError, type: 'addCollectionItem' });
+    }
+  }
+
+  getCollections(): void {
+    try {
+      this.collectionRepository.getCollections();
     } catch (error) {
       this.isError = true;
       this.dispatcherError.setError(error as any);
