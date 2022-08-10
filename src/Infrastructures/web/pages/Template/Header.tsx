@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import NavBar from '../../../../Interface/web/components/NavBar/NavBar';
 import HumbergerToggel from '../../../../Interface/web/components/UI/HumbergerToggle';
 import Notification from '../../../../Interface/web/components/UI/Notification';
@@ -46,12 +47,21 @@ export default function Header() {
         <HumbergerToggel TogelMenuHandler={TogelMenuHandler} mode={mode} />
         <NavBar mode={mode} />
       </HeaderApp>
-      <Notification
-        notificationMessage={notificationMessage}
-        isNotif={isNotif}
-        status={status}
-        errorMessage={errorMessage}
-      />
+      <div css={
+        css({
+          width: '100%',
+          position: 'fixed',
+          zIndex: 111,
+        })
+      }
+      >
+        <Notification
+          notificationMessage={notificationMessage}
+          isNotif={isNotif}
+          status={status}
+          errorMessage={errorMessage}
+        />
+      </div>
     </>
   );
 }

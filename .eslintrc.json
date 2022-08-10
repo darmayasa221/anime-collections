@@ -22,7 +22,8 @@
     "import/no-extraneous-dependencies": "off",
     "no-unused-expressions": "off",
     "class-methods-use-this": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "no-useless-escape": "off"
   },
   "ignorePatterns": ["dist"]
 }

@@ -4,6 +4,7 @@ import { Global } from '@emotion/react';
 import AnimePage from './pages/Anime/AnimePage';
 import Header from './pages/Template/Header';
 import AnimeDetailPage from './pages/Anime/AnimeDetailPage';
+import CollectionPage from './pages/Collection/CollectionPage';
 
 export default function Controller() {
   return (
@@ -13,6 +14,9 @@ export default function Controller() {
         <Routes>
           <Route path="/" element={<AnimePage />} />
           <Route path="/animes/:id" element={<AnimeDetailPage />} />
+          <Route path="/collection" element={<CollectionPage />} />
+          <Route path="*" element={<p>not found</p>} />
+
         </Routes>
       </main>
       <Global
@@ -22,8 +26,8 @@ export default function Controller() {
             padding: 0,
           },
           '#root': {
-            position: 'relative',
-            overflowX: 'hidden',
+            // position: 'relative',
+            // overflowX: 'hidden',
             display: 'flex',
             minHeight: '100vh',
             flexDirection: 'column',

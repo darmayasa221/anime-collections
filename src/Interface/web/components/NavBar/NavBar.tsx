@@ -46,7 +46,7 @@ const Nav = styled('nav')<Props>(
         fontSize: '40px',
       },
     },
-  }
+  },
 );
 
 export default function NavBar({ mode }: Props) {
@@ -57,7 +57,7 @@ export default function NavBar({ mode }: Props) {
           <NavLink to="/">Animes</NavLink>
         </li>
         <li>
-          <NavLink to="/">Anime Collections</NavLink>
+          <NavLink to="/collection">Anime Collections</NavLink>
         </li>
       </ul>
     </Nav>
