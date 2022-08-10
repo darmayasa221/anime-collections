@@ -12,17 +12,12 @@ const NotificationWrap = styled('div')<Omit<notificationInitialStateType, 'notif
     textAlign: 'center',
     right: 0,
     top: '8vh',
-    zIndex: 102,
     backgroundColor: 'white',
     transitionDuration: '150ms',
-    fontSize: '28px',
     boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.25)',
     borderColor: 'rgb(209 213 219)',
-    '@media screen and (min-width: 650px)': {
-      width: '50%',
-      h1: {
-        fontSize: '30px',
-      },
+    h1: {
+      fontSize: '25px',
     },
     '@media screen and (min-width: 850px)': {
       width: '40%',
