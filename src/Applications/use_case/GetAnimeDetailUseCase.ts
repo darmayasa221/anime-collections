@@ -31,7 +31,7 @@ export default class GetAnimeDetailUseCase implements iGetAnimeDetailUseCase {
   async execute(payload: number): Promise<void> {
     let isError = false;
     try {
-      const anime = await this.animeRepository.getAnimeById('cobak' as any);
+      const anime = await this.animeRepository.getAnimeById(payload);
       this.dispatcherAnime.setAnimeDetail({ ...anime });
     } catch (error) {
       isError = true;

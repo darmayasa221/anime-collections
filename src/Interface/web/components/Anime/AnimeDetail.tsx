@@ -26,7 +26,29 @@ const BannerImageWrap = styled('div')({
   top: 0,
   img: {
     width: '100%',
+    maxHeight: '120px',
   },
+  '@media screen and (min-width: 650px)': {
+    img: {
+      maxHeight: '260px',
+    },
+  },
+  '@media screen and (min-width: 850px)': {
+    // img: {
+    //   maxHeight: '0px',
+    // },
+  },
+  '@media screen and (min-width: 1000px)': {
+    img: {
+      maxHeight: '370px',
+    },
+  },
+  // '@media screen and (min-width: 1200px)': {
+  //   img: {
+  //     width: '100%',
+  //     maxHeight: '120px',
+  //   },
+  // },
 });
 const CoverImageWrap = styled('div')({
   position: 'relative',

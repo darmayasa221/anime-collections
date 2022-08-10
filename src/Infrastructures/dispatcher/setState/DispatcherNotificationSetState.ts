@@ -9,7 +9,7 @@ export default class DispatcherNotificationSetState extends DispatcherNotificati
     this.dispatch = dispatch;
   }
 
-  setNotification({ error }:{error:boolean}): void {
+  setNotification({ error, message }:{error?:boolean, message?: string}): void {
     if (!error) {
       setTimeout(() => {
         this.dispatch.setNotification((prev) => ({
@@ -18,12 +18,12 @@ export default class DispatcherNotificationSetState extends DispatcherNotificati
           status: 'none',
           notificationMessage: '',
         }));
-      }, 3000);
+      }, message ? 1000 : 3000);
       this.dispatch.setNotification((prev) => ({
         ...prev,
         isNotif: true,
         status: 'success',
-        notificationMessage: 'success to display this pages',
+        notificationMessage: message ? `${message} success been added to collection` : 'success to display this pages',
       }));
     } else {
       setTimeout(() => {
