@@ -1,5 +1,6 @@
 import DispatcherCollection from '../../../Applications/dispatcher/DispatcherCollection';
 import { iAnimed } from '../../../Domains/animes/entities/Anime';
+import { iCollectionItem } from '../../../Domains/collections/entities/CollectionItem';
 import { dispatchersObject } from '../../../Interface/web/dispatcherAdapter/DispatcherAdapter';
 
 export default class DispatcherCollectionSetState extends DispatcherCollection {
@@ -15,5 +16,8 @@ export default class DispatcherCollectionSetState extends DispatcherCollection {
       prev.push(payload);
       return [...prev];
     });
+  }
+
+  setCollection(payload: iCollectionItem) {
   }
 }

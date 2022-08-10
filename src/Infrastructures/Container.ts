@@ -8,9 +8,11 @@ import AnimeRepositoryApollo from './repository/apollo/AnimeRepositoryApollo';
 import DispatcherAdapter from '../Interface/web/dispatcherAdapter/DispatcherAdapter';
 import DispatcherCollectionSetState from './dispatcher/setState/DispatcherCollectionSetState';
 import CollectionUseCase from '../Applications/use_case/CollectionUseCase';
+import CollectionRepositoryWebStorage from './repository/webStorage/CollectionRepositoryWebStorage';
 // Adapter
 const { dispatchers, setDispatcher } = DispatcherAdapter;
 // service
+const collectionRepository = new CollectionRepositoryWebStorage();
 const animeRepositoryApollo = new AnimeRepositoryApollo(apolloClient, gql);
 const dispatcherAnime = new DispatcherAnimeSetState(dispatchers);
 const dispatcherError = new DispatcherErrorSetState(dispatchers);
@@ -29,7 +31,12 @@ const getAnimesUseCase = new GetAnimesUseCase(
   dispatcherNotification,
   dispatcherError,
 );
-const collectionUseCase = new CollectionUseCase(dispatchCollection, dispatcherNotification);
+const collectionUseCase = new CollectionUseCase(
+  collectionRepository,
+  dispatchCollection,
+  dispatcherNotification,
+  dispatcherError,
+);
 const Container = {
   setDispatcher,
   getAnimeDetailUseCase,

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { iAnimed } from '../../../../Domains/animes/entities/Anime';
 

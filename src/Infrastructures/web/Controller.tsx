@@ -16,7 +16,6 @@ export default function Controller() {
           <Route path="/animes/:id" element={<AnimeDetailPage />} />
           <Route path="/collection" element={<CollectionPage />} />
           <Route path="*" element={<p>not found</p>} />
-
         </Routes>
       </main>
       <Global
@@ -32,6 +31,11 @@ export default function Controller() {
             minHeight: '100vh',
             flexDirection: 'column',
           },
+          '#modal-form': {
+            position: 'absolute',
+            width: '100%',
+            zIndex: 1,
+          },
           main: {
             position: 'relative',
             padding: '32px',
@@ -40,5 +44,6 @@ export default function Controller() {
         }}
       />
     </>
+
   );
 }
