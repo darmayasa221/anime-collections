@@ -17,7 +17,7 @@ const AnimeDetailWrap = styled('div')({
       top: 0,
       position: 'absolute',
       width: '1200px',
-    }
+    },
   },
 });
 const BannerImageWrap = styled('div')({
@@ -25,8 +25,30 @@ const BannerImageWrap = styled('div')({
   right: 0,
   top: 0,
   img: {
-    width: '100%'
-  }
+    width: '100%',
+    maxHeight: '120px',
+  },
+  '@media screen and (min-width: 650px)': {
+    img: {
+      maxHeight: '260px',
+    },
+  },
+  '@media screen and (min-width: 850px)': {
+    // img: {
+    //   maxHeight: '0px',
+    // },
+  },
+  '@media screen and (min-width: 1000px)': {
+    img: {
+      maxHeight: '370px',
+    },
+  },
+  // '@media screen and (min-width: 1200px)': {
+  //   img: {
+  //     width: '100%',
+  //     maxHeight: '120px',
+  //   },
+  // },
 });
 const CoverImageWrap = styled('div')({
   position: 'relative',
@@ -63,8 +85,8 @@ const CoverImageWrap = styled('div')({
     img: {
       maxHeight: '560px',
       marginLeft: '20px',
-    }
-  }
+    },
+  },
 });
 const GenresWrap = styled('div')({
   display: 'grid',
@@ -88,7 +110,7 @@ const GenresWrap = styled('div')({
     p: {
       fontSize: '20px',
     },
-  }
+  },
 });
 const RatingWrap = styled('div')({
   backgroundColor: 'black',
@@ -105,7 +127,7 @@ const DescriptionWrap = styled('div')({
     p: {
       fontSize: '20px',
     },
-  }
+  },
 });
 const TitleWrap = styled('div')({
   display: 'grid',

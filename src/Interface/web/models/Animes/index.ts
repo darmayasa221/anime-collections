@@ -13,7 +13,7 @@ export type setAnimesDispatchType = (
 const AnimesUseState = () => {
   const [animes, setAnimes] = useState<animesInitialStateType>({
     isLoading: true,
-    data: {} as any,
+    data: [],
   });
   return [animes, setAnimes] as const;
 };

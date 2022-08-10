@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import styled from '@emotion/styled';
 import { iAnimed } from '../../../../Domains/animes/entities/Anime';
@@ -6,7 +7,9 @@ import Anime from './Anime';
 
 type props = {
   animes: Array<iAnimed>;
+  addAnimeToCollection?(data: iAnimed) :void
 };
+
 const AnimesWrap = styled('div')({
   display: 'grid',
   gridTemplateColumns: '1fr',
@@ -28,13 +31,13 @@ const AnimesWrap = styled('div')({
   },
 });
 
-export default function AnimeList({ animes }: props) {
+export default function AnimeList({ animes, addAnimeToCollection }: props) {
   return (
     <Content>
       <h2>Anime Collections</h2>
       <AnimesWrap>
         {animes.map((anime) => (
-          <Anime key={anime.id} anime={anime} />
+          <Anime addAnimeToCollection={addAnimeToCollection} key={anime.id} anime={anime} />
         ))}
       </AnimesWrap>
     </Content>

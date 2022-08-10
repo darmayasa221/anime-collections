@@ -1,6 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable no-confusing-arrow */
-/* eslint-disable implicit-arrow-linebreak */
 import React from 'react';
 import styled from '@emotion/styled';
 
@@ -35,22 +32,22 @@ const HumbergerToggelWrap = styled('div')<Pick<props, 'mode'>>(
       },
     },
   },
-  ({ mode }) =>
+  ({ mode }) => (
     mode
       ? {
-          'span:nth-of-type(1)': {
-            transformOrigin: '0 0',
-            transform: 'rotate(45deg) translate(-1px, -1px)',
-          },
-          'span:nth-of-type(3)': {
-            transformOrigin: '0 100%',
-            transform: 'rotate(-45deg) translate(-1px, -1px)',
-          },
-          'span:nth-of-type(2)': {
-            transform: 'scale(0)',
-          },
-        }
-      : ''
+        'span:nth-of-type(1)': {
+          transformOrigin: '0 0',
+          transform: 'rotate(45deg) translate(-1px, -1px)',
+        },
+        'span:nth-of-type(3)': {
+          transformOrigin: '0 100%',
+          transform: 'rotate(-45deg) translate(-1px, -1px)',
+        },
+        'span:nth-of-type(2)': {
+          transform: 'scale(0)',
+        },
+      }
+      : ''),
 );
 
 export default function HumbergerToggel({ TogelMenuHandler, mode }: props) {

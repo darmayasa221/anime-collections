@@ -10,13 +10,13 @@ export default function AnimeDetailPage() {
   const [animeDetail, setAnimeDetail] = AnimeDetailUseState();
   const { getAnimeDetailUseCase, setDispatcher } = useContext(ContainerContex);
   useEffect(() => {
-    animeDetail.isLoading &&
-      AnimeDetailAction(
-        getAnimeDetailUseCase,
-        setAnimeDetail,
-        setDispatcher,
-        Number(id)
-      );
+    animeDetail.isLoading
+    && AnimeDetailAction(
+      getAnimeDetailUseCase,
+      setAnimeDetail,
+      setDispatcher,
+      Number(id),
+    );
   }, [animeDetail.isLoading]);
   return animeDetail.isLoading ? (
     <h1>Loading</h1>

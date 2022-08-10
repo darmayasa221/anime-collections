@@ -1,10 +1,8 @@
-/* eslint-disable comma-dangle */
 import { iAnimesRepository } from '../../Domains/animes/AnimeRepository';
 import { iDispatcherAnime } from '../dispatcher/DispatcherAnime';
 import { iDispatcherError } from '../dispatcher/DispatcherError';
 import { iDispatcherNotification } from '../dispatcher/DispatcherNotification';
 
-/* eslint-disable no-unused-vars */
 export interface iGetAnimeDetailUseCase {
   execute(payload: number): Promise<any>;
 }
@@ -22,7 +20,7 @@ export default class GetAnimeDetailUseCase implements iGetAnimeDetailUseCase {
     animeRepository: Pick<iAnimesRepository, 'getAnimeById'>,
     dispatcherAnime: Pick<iDispatcherAnime, 'setAnimeDetail'>,
     dispatcherNotification: iDispatcherNotification,
-    dispatcherError: iDispatcherError
+    dispatcherError: iDispatcherError,
   ) {
     this.animeRepository = animeRepository;
     this.dispatcherAnime = dispatcherAnime;
@@ -37,7 +35,7 @@ export default class GetAnimeDetailUseCase implements iGetAnimeDetailUseCase {
       this.dispatcherAnime.setAnimeDetail({ ...anime });
     } catch (error) {
       isError = true;
-      this.dispatcherError.setError(error as string);
+      this.dispatcherError.setError(error as any);
     } finally {
       this.dispatcherNotification.setNotification({ error: isError });
     }
