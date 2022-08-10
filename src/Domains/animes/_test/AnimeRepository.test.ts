@@ -6,11 +6,11 @@ describe('AnimeRepository', () => {
     class DummyRepository extends AnimeRepository {}
     const dumyRepository = new DummyRepository();
     // Action and Assert
-    await expect(dumyRepository.getAnimes()).rejects.toThrowError(
-      'ANIME_REPOSITORY.METHOD_NOT_IMPLEMENTED'
+    await expect(() => dumyRepository.getAnimes()).rejects.toThrowError(
+      'ANIME_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
-    await expect(dumyRepository.getAnimeById(1)).rejects.toThrowError(
-      'ANIME_REPOSITORY.METHOD_NOT_IMPLEMENTED'
+    await expect(() => dumyRepository.getAnimeById(1)).rejects.toThrowError(
+      'ANIME_REPOSITORY.METHOD_NOT_IMPLEMENTED',
     );
   });
 });
