@@ -42,7 +42,7 @@ export default class GetAnimeDetailUseCase implements iGetAnimeDetailUseCase {
       this.isError = true;
       this.dispatcherError.setError(error as any);
     } finally {
-      this.dispatcherNotification.setNotification({ error: this.isError, type: 'getAnimeDetail' });
+      this.dispatcherNotification.setNotification({ error: this.isError });
     }
   }
 }
