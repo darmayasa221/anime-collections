@@ -1,8 +1,8 @@
 import { isArray } from '@apollo/client/cache/inmemory/helpers';
 import { setAnimeDetailDispatchType } from '../models/AnimeDetail';
 import { setAnimesDispatchType } from '../models/Animes';
-import { setCollectionDispatchType } from '../models/Collection';
-import { setAnimesToCollectionDispatchType } from '../models/CollectionAnime';
+import { setCollectionsDispatchType } from '../models/Collections';
+import { setCollectionItemDispatchType } from '../models/CollectionItem';
 import { setErrorDispatchType } from '../models/Error';
 import { setNotificationDispatchType } from '../models/Notification';
 
@@ -12,8 +12,8 @@ export type dispatchersObject = {
   setAnimeDetail: setAnimeDetailDispatchType;
   setError: setErrorDispatchType;
   setNotification: setNotificationDispatchType;
-  setAnimeToCollection: setAnimesToCollectionDispatchType
-  setCollection: setCollectionDispatchType
+  setCollectionItem: setCollectionItemDispatchType
+  setCollections: setCollectionsDispatchType
 };
 
 export type setDispathcerType = (dispatcher: {
@@ -30,8 +30,8 @@ const DispatcherAdapter: iDispatcherAdapter = {
     setAnimeDetail() {},
     setError() {},
     setNotification() {},
-    setAnimeToCollection() {},
-    setCollection() {},
+    setCollections() {},
+    setCollectionItem() {},
   },
   setDispatcher(dispatcher) {
     if (!isArray(dispatcher)) {

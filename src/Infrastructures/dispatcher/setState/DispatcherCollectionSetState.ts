@@ -1,6 +1,6 @@
 import DispatcherCollection from '../../../Applications/dispatcher/DispatcherCollection';
-import { iAnimed } from '../../../Domains/animes/entities/Anime';
 import { iCollectionItem } from '../../../Domains/collections/entities/CollectionItem';
+import { iCollections } from '../../../Domains/collections/entities/Collections';
 import { dispatchersObject } from '../../../Interface/web/dispatcherAdapter/DispatcherAdapter';
 
 export default class DispatcherCollectionSetState extends DispatcherCollection {
@@ -11,13 +11,14 @@ export default class DispatcherCollectionSetState extends DispatcherCollection {
     this.dispatch = dispatch;
   }
 
-  setAnimeToCollection(payload: iAnimed): void {
-    this.dispatch.setAnimeToCollection((prev) => {
-      prev.push(payload);
-      return [...prev];
-    });
+  setCollectionItem(payload: iCollectionItem):void {
+    this.dispatch.setCollectionItem((prev) => ({
+      ...prev,
+      ...payload,
+    }));
   }
 
-  setCollection(payload: iCollectionItem) {
+  setCollections(payload: iCollections):void {
+    this.dispatch.setCollections((prev) => ({ ...prev, ...payload }));
   }
 }

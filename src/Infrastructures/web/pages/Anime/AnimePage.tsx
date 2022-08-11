@@ -2,18 +2,18 @@ import React, { useContext, useEffect } from 'react';
 import { iAnimed } from '../../../../Domains/animes/entities/Anime';
 import AnimeList from '../../../../Interface/web/components/Anime/AnimeList';
 import AnimesAction from '../../../../Interface/web/controllers/Animes';
-import CollectionAction from '../../../../Interface/web/controllers/Collection';
+import CollectionAction from '../../../../Interface/web/controllers/CollectionItem';
 import AnimesUseState from '../../../../Interface/web/models/Animes';
-import CollectionChartUseState from '../../../../Interface/web/models/CollectionAnime';
+import CollectionItemUseState from '../../../../Interface/web/models/CollectionItem';
 import ContainerContex from '../../../store/ContainerContex';
 
 export default function AnimePage() {
   const [animes, setAnimes] = AnimesUseState();
-  const [collectionChart, setAnimeToCollection] = CollectionChartUseState();
+  const [_, setCollectionItem] = CollectionItemUseState();
   const { getAnimesUseCase, collectionUseCase, setDispatcher } = useContext(ContainerContex);
   const { addAnimeToCollectionAction } = CollectionAction(
     collectionUseCase,
-    setAnimeToCollection,
+    setCollectionItem,
     setDispatcher,
   );
   const addAnimeCollectionHandler = (data: iAnimed) => {

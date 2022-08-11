@@ -7,7 +7,7 @@ import { iDispatcherNotification } from '../dispatcher/DispatcherNotification';
 
 export interface iCollectionUseCase {
   addAnimeToCollection(payload: iAnimed): void
-  addCollection({ nameCollection }:iCollectionItem): void
+  addCollectionItem({ nameCollection }:iCollectionItem): void
   getCollections():void
 }
 export default class CollectionUseCase implements iCollectionUseCase {
@@ -49,11 +49,11 @@ export default class CollectionUseCase implements iCollectionUseCase {
     }
   }
 
-  addCollection(payload: iCollectionItem): void {
+  addCollectionItem(payload: iCollectionItem): void {
     try {
       const newCollection = new CollectionItem(payload);
       this.collectionRepository.addCollection(newCollection);
-      this.dispatcherCollection.setCollection(newCollection);
+      this.dispatcherCollection.setCollectionItem(newCollection);
       this.message = payload.nameCollection;
     } catch (error) {
       this.isError = true;
@@ -65,7 +65,8 @@ export default class CollectionUseCase implements iCollectionUseCase {
 
   getCollections(): void {
     try {
-      this.collectionRepository.getCollections();
+      const collections = this.collectionRepository.getCollections();
+      this.dispatcherCollection.setCollections(collections);
     } catch (error) {
       this.isError = true;
       this.dispatcherError.setError(error as any);

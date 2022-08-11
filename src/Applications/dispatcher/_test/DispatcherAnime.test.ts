@@ -7,10 +7,10 @@ describe('DispatcherAnime', () => {
     const dumyDispatcher = new DummyDispatcher();
     // Acction And Assert
     expect(() => dumyDispatcher.setAnimeDetail({} as any)).toThrowError(
-      'DISPATCHER_ANIME.METHOD_NOT_IMPLEMENTED'
+      'DISPATCHER_ANIME.METHOD_NOT_IMPLEMENTED',
     );
     expect(() => dumyDispatcher.setAnimes({} as any)).toThrowError(
-      'DISPATCHER_ANIME.METHOD_NOT_IMPLEMENTED'
+      'DISPATCHER_ANIME.METHOD_NOT_IMPLEMENTED',
     );
   });
 });

@@ -7,7 +7,7 @@ describe('DispatcherNotification', () => {
     const dummyDispatcher = new DummyDispatcher();
     // Action and Assert
     expect(() => dummyDispatcher.setNotification({} as any)).toThrowError(
-      'DISPATCHER_NOTIFICATION.METHOD_NOT_IMPELEMENTED'
+      'DISPATCHER_NOTIFICATION.METHOD_NOT_IMPELEMENTED',
     );
   });
 });
