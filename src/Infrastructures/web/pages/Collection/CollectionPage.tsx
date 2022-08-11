@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import CollectionForm from '../../../../Interface/web/components/Collection/CollectionForm';
-import CollectionAction from '../../../../Interface/web/controllers/Collection';
-import CollectionUseState from '../../../../Interface/web/models/Collection';
 import ContainerContex from '../../../store/ContainerContex';
+import CollectionList from '../../../../Interface/web/components/Collection/CollectionList';
+import CollectionsUseState from '../../../../Interface/web/models/Collections';
+import CollectionItemUseState from '../../../../Interface/web/models/CollectionItem';
+import CollectionItemAction from '../../../../Interface/web/controllers/CollectionItem';
+import CollectionsAction from '../../../../Interface/web/controllers/Collections';
 
 const CollectionHeaderWrap = styled('div')({
   h1: {
@@ -24,8 +27,16 @@ const CollectionHeaderWrap = styled('div')({
 export default function CollectionPage() {
   const [modalForm, setModalForm] = useState(false);
   const { collectionUseCase, setDispatcher } = useContext(ContainerContex);
-  const [_, setCollection] = CollectionUseState();
-  const { addCollectionAction } = CollectionAction(collectionUseCase, setCollection, setDispatcher);
+  const [collections, setCollections] = CollectionsUseState();
+  const [_, setCollectionItem] = CollectionItemUseState();
+  const { addCollectionItem } = CollectionItemAction(
+    collectionUseCase,
+    setCollectionItem,
+    setDispatcher,
+  );
+  useEffect(() => {
+    CollectionsAction(collectionUseCase, setCollections, setDispatcher);
+  }, [modalForm]);
   return (
     <>
       <CollectionHeaderWrap>
@@ -33,7 +44,8 @@ export default function CollectionPage() {
         <button type="button" onClick={() => { setModalForm(true); }}>Add a Collection</button>
       </CollectionHeaderWrap>
       {modalForm
-       && <CollectionForm handlerData={addCollectionAction} setModalForm={setModalForm} />}
+       && <CollectionForm handlerData={addCollectionItem} setModalForm={setModalForm} />}
+      <CollectionList collections={collections.collections} />
     </>
   );
 }

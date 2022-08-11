@@ -6,7 +6,7 @@ import { setAnimesDispatchType } from '../../models/Animes';
 export default function AnimesAction(
   useCase: iGetAnimesUseCase,
   dispatch: setAnimesDispatchType,
-  dispactAdapter: setDispathcerType
+  dispactAdapter: setDispathcerType,
 ) {
   dispactAdapter({ setAnimes: dispatch });
   useCase.execute();

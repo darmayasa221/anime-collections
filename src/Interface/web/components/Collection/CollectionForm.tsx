@@ -87,6 +87,7 @@ function CollectionForm({ setModalForm, handlerData }:props) {
     event.preventDefault();
     const enteredText = nameInputRef.current?.value;
     handlerData(enteredText);
+    setModalForm(() => false);
   };
   return (
     <CollectionFormWrap>
