@@ -1,5 +1,4 @@
 export type iDispatcherNotificationInitial = {
-  type?: 'none' | 'addCollectionItem'| 'addCollection' | 'getAnimeDetail' | 'getAnimes'
   error?: boolean,
   message?: string,
 }
