@@ -17,12 +17,12 @@ const CollectionHeaderWrap = styled('div')({
   button: {
     padding: '8px',
     transition: 'all 0.3s ease',
-    boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+    boxShadow:
+      '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
     ':active': {
       transform: 'translateY(0.25rem)',
     },
   },
-
 });
 export default function CollectionPage() {
   const [modalForm, setModalForm] = useState(false);
@@ -40,11 +40,22 @@ export default function CollectionPage() {
   return (
     <>
       <CollectionHeaderWrap>
-        <h1>Collections Anime</h1>
-        <button type="button" onClick={() => { setModalForm(true); }}>Add a Collection</button>
+        <h1>test</h1>
+        <button
+          type="button"
+          onClick={() => {
+            setModalForm(true);
+          }}
+        >
+          Add a Collection
+        </button>
       </CollectionHeaderWrap>
-      {modalForm
-       && <CollectionForm handlerData={addCollectionItem} setModalForm={setModalForm} />}
+      {modalForm && (
+        <CollectionForm
+          handlerData={addCollectionItem}
+          setModalForm={setModalForm}
+        />
+      )}
       <CollectionList collections={collections.collections} />
     </>
   );
