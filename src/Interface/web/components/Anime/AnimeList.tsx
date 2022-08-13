@@ -13,15 +13,15 @@ type props = {
 const AnimesWrap = styled('div')({
   display: 'grid',
   gridTemplateColumns: '1fr',
-  gap: '16px',
+  gap: '24px',
   margin: '32px 0',
   '@media screen and (min-width: 650px)': {
     gridTemplateColumns: '1fr 1fr',
     margin: '20px 0',
-    fontSize: '18px',
   },
   '@media screen and (min-width: 850px)': {
     gridTemplateColumns: 'repeat(3, 1fr)',
+    fontSize: '18px',
   },
   '@media screen and (min-width: 1200px)': {
     gridTemplateColumns: 'repeat(4, 1fr)',

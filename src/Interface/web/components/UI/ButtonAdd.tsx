@@ -4,23 +4,29 @@ import { FormEvent } from 'react';
 import { iAnimed } from '../../../../Domains/animes/entities/Anime';
 
 type props = {
+  className?: string;
   text: string,
   anime:iAnimed,
   handlerData?(data: iAnimed) :void
 }
 const ButtotWrap = styled('div')({
+  cursor: 'pointer',
+  background: 'white',
   position: 'absolute',
   right: 0,
-  backgroundColor: 'white',
+  borderColor: 'rgb(209 213 219)',
+  boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+  borderRadius: '0.25rem',
   padding: '10px',
-  borderRadius: '4px',
   transition: 'all 0.2s',
   ':hover': {
     transform: 'scale(1.1)',
     transition: 'all 0.2s',
   },
 });
-export default function Button({ text, anime, handlerData }: props) {
+export default function Button({
+  className, text, anime, handlerData,
+}: props) {
   const onClickHandler = (event: FormEvent) => {
     event.preventDefault();
     if (handlerData !== undefined) {
@@ -28,7 +34,7 @@ export default function Button({ text, anime, handlerData }: props) {
     }
   };
   return (
-    <ButtotWrap onClick={onClickHandler}>
+    <ButtotWrap className={className} onClick={onClickHandler}>
       <span>
         add to collection
       </span>

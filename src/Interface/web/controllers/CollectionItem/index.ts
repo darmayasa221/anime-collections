@@ -9,9 +9,9 @@ export default function CollectionItemAction(
   dispatch: setCollectionItemDispatchType,
   dispactAdapter: setDispathcerType,
 ) {
-  const addCollectionItem = (payload: string) => {
+  const addCollectionItem = (payload: iAnimed) => {
     dispactAdapter({ setCollectinItem: dispatch });
-    useCase.addCollectionItem({ nameCollection: payload, animeCollection: [] });
+    useCase.addCollectionItem({ nameCollection: '', animeCollection: [payload] });
   };
   return { addCollectionItem };
 }
