@@ -76,31 +76,3 @@ export default function Collection({ animeCollection, nameCollection }: props) {
     </NavLink>
   );
 }
-{ /* <NavLink
-      to={`/animes/${anime.id}`}
-      css={css`
-        ${animeNavLink}
-        border: solid 5px ${anime.coverImage.color};
-      `}
-    >
-      <AnimeCoverImageWrap>
-        <Button text="" handlerData={addAnimeToCollection} anime={anime} />
-        <img src={anime.coverImage.size.extraLarge} alt={anime.title.native} />
-      </AnimeCoverImageWrap>
-      <div
-        css={css`
-          padding: 0 16px 16px 16px;
-        `}
-      >
-        <h1>Title</h1>
-        <TitleWrap>
-          {titleKey.map((title) => (
-            <AnimeTitle
-              key={title}
-              title={title}
-              titleDescription={anime.title[title]}
-            />
-          ))}
-        </TitleWrap>
-      </div>
-    </NavLink> */ }
