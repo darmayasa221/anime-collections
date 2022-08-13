@@ -6,12 +6,11 @@ import Collection from './Collection';
 import { iCollections } from '../../../../Domains/collections/entities/Collections';
 
 type props = iCollections;
-
 const CollectionsWrap = styled('div')({
-  // display: 'grid',
-  // gridTemplateColumns: '1fr',
-  // gap: '16px',
-  // margin: '32px 0',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2,1fr)',
+  gap: '20px',
+  margin: '32px 0',
   // '@media screen and (min-width: 650px)': {
   //   gridTemplateColumns: '1fr 1fr',
   //   margin: '20px 0',
@@ -28,9 +27,13 @@ const CollectionsWrap = styled('div')({
   // },
 });
 
+const ContentCollection = styled(Content)({
+  paddingTop: '40px',
+});
+
 export default function CollectionList({ collections }: props) {
   return (
-    <Content>
+    <ContentCollection>
       <CollectionsWrap>
         {collections.map((animeCollection) => (
           <Collection
@@ -40,6 +43,7 @@ export default function CollectionList({ collections }: props) {
           />
         ))}
       </CollectionsWrap>
-    </Content>
+    </ContentCollection>
+
   );
 }

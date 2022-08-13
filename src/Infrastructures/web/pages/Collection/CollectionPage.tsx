@@ -24,6 +24,15 @@ const CollectionHeaderWrap = styled('div')({
     },
   },
 });
+const ContentWrap = styled('div')({
+  width: '100%',
+  position: 'fixed',
+  backgroundColor: 'white',
+  zIndex: 4,
+  left: 0,
+  padding: '10px 32px',
+  top: '70px',
+});
 export default function CollectionPage() {
   const [modalForm, setModalForm] = useState({
     visible: false,
@@ -53,26 +62,29 @@ export default function CollectionPage() {
   }, [modalForm.handler]);
   return (
     <>
-      <CollectionHeaderWrap>
-        <h1>test</h1>
-        <button
-          type="button"
-          onClick={() => {
-            setModalForm({
-              visible: true,
-              handler: false,
-            });
-          }}
-        >
-          Add a Collection
-        </button>
-      </CollectionHeaderWrap>
-      {modalForm.visible && (
+      <ContentWrap>
+        <CollectionHeaderWrap>
+          <h1>test</h1>
+          <button
+            type="button"
+            onClick={() => {
+              setModalForm({
+                visible: true,
+                handler: false,
+              });
+            }}
+          >
+            Add a Collection
+          </button>
+        </CollectionHeaderWrap>
+        {modalForm.visible && (
         <CollectionForm
           handlerData={addCollectionItemAction}
           setModalForm={setModalForm}
         />
-      )}
+        )}
+
+      </ContentWrap>
       <CollectionList collections={collections.collections} />
     </>
   );

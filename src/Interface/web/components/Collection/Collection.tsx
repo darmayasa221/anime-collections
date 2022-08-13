@@ -4,11 +4,11 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 import { iCollectionItem } from '../../../../Domains/collections/entities/CollectionItem';
+import defaultCover from '../../assert/default.png';
 
 type props = iCollectionItem
 
 const collectionNavLink = css({
-  width: '100%',
   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
   backgroundColor: 'white',
   borderRadius: '8px',
@@ -23,10 +23,8 @@ const collectionNavLink = css({
   },
 });
 const TitleWrap = styled('div')({
-  display: 'grid',
-  gridTemplateColumns: '1fr 2fr',
-  gridColumnGap: '10px',
-  p: {
+  padding: '0 5px',
+  h1: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: '-webkit-box',
@@ -38,8 +36,15 @@ const CollectionCoverImageWrap = styled('div')({
   overflow: 'hidden',
   position: 'relative',
   img: {
-    width: '105%',
+    width: '100%',
   },
+});
+const ButtonWrap = styled('div')({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2,1fr)',
+  height: '30px',
+  gap: '5px',
+  padding: '2px 5px',
 });
 
 export default function Collection({ animeCollection, nameCollection }: props) {
@@ -57,17 +62,17 @@ export default function Collection({ animeCollection, nameCollection }: props) {
           alt={animeCollection[0].title.native || 'default'}
         /> */}
         <img
-          src=""
+          src={defaultCover}
           alt=""
         />
       </CollectionCoverImageWrap>
       <TitleWrap>
         <h1>{nameCollection}</h1>
       </TitleWrap>
-      <div>
-        <button>delete</button>
-        <button>edit</button>
-      </div>
+      <ButtonWrap>
+        <button type="submit">delete</button>
+        <button type="submit">edit</button>
+      </ButtonWrap>
     </NavLink>
   );
 }

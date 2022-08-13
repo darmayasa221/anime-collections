@@ -15,7 +15,7 @@ const CollectionFormWrap = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#404040',
+  backgroundColor: '#40404059',
   h1: {
     textAlign: 'center',
   },

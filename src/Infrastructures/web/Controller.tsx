@@ -34,7 +34,7 @@ export default function Controller() {
           '#modal-form': {
             position: 'absolute',
             width: '100%',
-            zIndex: 1,
+            zIndex: 11,
           },
           main: {
             position: 'relative',
