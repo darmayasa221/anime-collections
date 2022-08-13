@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 type props = {
-  setModalForm: (callback:(prev: boolean) => any) => any,
+  setModalForm: (callback:(prev: object) => any) => any,
   handlerData: (payload: any) => any
 }
 const CollectionFormWrap = styled('div')({
@@ -87,8 +87,13 @@ function CollectionForm({ setModalForm, handlerData }:props) {
     event.preventDefault();
     const enteredText = nameInputRef.current?.value;
     handlerData(enteredText);
-    setModalForm(() => false);
+    setModalForm((prev) => ({
+      ...prev,
+      visible: false,
+      handler: true,
+    }));
   };
+
   return (
     <CollectionFormWrap>
       <form css={collectionForm} onSubmit={onSubmitHandler}>

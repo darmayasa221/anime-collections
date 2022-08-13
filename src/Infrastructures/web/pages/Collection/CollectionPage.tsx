@@ -25,18 +25,32 @@ const CollectionHeaderWrap = styled('div')({
   },
 });
 export default function CollectionPage() {
-  const [modalForm, setModalForm] = useState(false);
+  const [modalForm, setModalForm] = useState({
+    visible: false,
+    handler: false,
+  });
   const { collectionUseCase, setDispatcher } = useContext(ContainerContex);
   const [collections, setCollections] = CollectionsUseState();
   const [_, setCollectionItem] = CollectionItemUseState();
-  const { addCollectionItem } = CollectionItemAction(
+  const { addCollectionItemAction } = CollectionItemAction(
     collectionUseCase,
     setCollectionItem,
     setDispatcher,
   );
+  console.log(collections, _);
   useEffect(() => {
     CollectionsAction(collectionUseCase, setCollections, setDispatcher);
-  }, [modalForm]);
+  }, []);
+  useEffect(() => {
+    modalForm.handler && CollectionsAction(collectionUseCase, setCollections, setDispatcher);
+    return (() => {
+      setModalForm((prev) => ({
+        ...prev,
+        visible: false,
+        handler: false,
+      }));
+    });
+  }, [modalForm.handler]);
   return (
     <>
       <CollectionHeaderWrap>
@@ -44,15 +58,18 @@ export default function CollectionPage() {
         <button
           type="button"
           onClick={() => {
-            setModalForm(true);
+            setModalForm({
+              visible: true,
+              handler: false,
+            });
           }}
         >
           Add a Collection
         </button>
       </CollectionHeaderWrap>
-      {modalForm && (
+      {modalForm.visible && (
         <CollectionForm
-          handlerData={addCollectionItem}
+          handlerData={addCollectionItemAction}
           setModalForm={setModalForm}
         />
       )}

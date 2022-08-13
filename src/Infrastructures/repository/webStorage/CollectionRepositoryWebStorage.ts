@@ -13,11 +13,19 @@ export default class CollectionRepositoryWebStorage extends CollectionRepository
   }
 
   getCollections(): iCollections | [] {
-    const collections:iCollections = JSON.parse(localStorage.getItem('collections') || '');
-    if (collections.collections.length > 1) {
-      return new Collections(collections);
+    let collections:iCollections = {
+      collections: [],
+    };
+    try {
+      collections = JSON.parse(localStorage.getItem('collections') || '');
+    } catch (error) {
+      throw new Error('not collection currently you can create the collections');
+    } finally {
+      if (collections.collections.length) {
+        collections = new Collections(collections);
+      }
     }
-    return [];
+    return collections;
   }
 
   getCollectionDetail(nameCollection: string): iCollectionItem | any {

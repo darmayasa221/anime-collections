@@ -8,17 +8,16 @@ import { iCollectionItem } from '../../../../Domains/collections/entities/Collec
 type props = iCollectionItem
 
 const collectionNavLink = css({
-  position: 'relative',
   width: '100%',
   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
   backgroundColor: 'white',
   borderRadius: '8px',
   overflow: 'hidden',
-  display: 'block',
   color: 'black',
   textDecoration: 'unset',
   transition: 'all 0.2s',
   ':hover': {
+    zIndex: 2,
     transform: 'scale(1.1)',
     transition: 'all 0.2s',
   },
@@ -36,8 +35,10 @@ const TitleWrap = styled('div')({
   },
 });
 const CollectionCoverImageWrap = styled('div')({
+  overflow: 'hidden',
+  position: 'relative',
   img: {
-    width: '100%',
+    width: '105%',
   },
 });
 
@@ -63,6 +64,38 @@ export default function Collection({ animeCollection, nameCollection }: props) {
       <TitleWrap>
         <h1>{nameCollection}</h1>
       </TitleWrap>
+      <div>
+        <button>delete</button>
+        <button>edit</button>
+      </div>
     </NavLink>
   );
 }
+{ /* <NavLink
+      to={`/animes/${anime.id}`}
+      css={css`
+        ${animeNavLink}
+        border: solid 5px ${anime.coverImage.color};
+      `}
+    >
+      <AnimeCoverImageWrap>
+        <Button text="" handlerData={addAnimeToCollection} anime={anime} />
+        <img src={anime.coverImage.size.extraLarge} alt={anime.title.native} />
+      </AnimeCoverImageWrap>
+      <div
+        css={css`
+          padding: 0 16px 16px 16px;
+        `}
+      >
+        <h1>Title</h1>
+        <TitleWrap>
+          {titleKey.map((title) => (
+            <AnimeTitle
+              key={title}
+              title={title}
+              titleDescription={anime.title[title]}
+            />
+          ))}
+        </TitleWrap>
+      </div>
+    </NavLink> */ }

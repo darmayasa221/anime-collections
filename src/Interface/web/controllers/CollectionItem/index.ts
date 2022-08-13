@@ -1,7 +1,5 @@
 import { iCollectionUseCase } from '../../../../Applications/use_case/CollectionUseCase';
-import { iAnimed } from '../../../../Domains/animes/entities/Anime';
 import { setDispathcerType } from '../../dispatcherAdapter/DispatcherAdapter';
-import { setCollectionsDispatchType } from '../../models/Collections';
 import { setCollectionItemDispatchType } from '../../models/CollectionItem';
 
 export default function CollectionItemAction(
@@ -9,9 +7,9 @@ export default function CollectionItemAction(
   dispatch: setCollectionItemDispatchType,
   dispactAdapter: setDispathcerType,
 ) {
-  const addCollectionItem = (payload: iAnimed) => {
+  const addCollectionItemAction = (payload: string) => {
     dispactAdapter({ setCollectinItem: dispatch });
-    useCase.addCollectionItem({ nameCollection: '', animeCollection: [payload] });
+    useCase.addCollectionItem({ nameCollection: payload, animeCollection: [] });
   };
-  return { addCollectionItem };
+  return { addCollectionItemAction };
 }
