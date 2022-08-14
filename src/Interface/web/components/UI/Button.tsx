@@ -1,15 +1,14 @@
 /* eslint-disable react/require-default-props */
 import styled from '@emotion/styled';
 import { FormEvent } from 'react';
-import { iAnimed } from '../../../../Domains/animes/entities/Anime';
 
 type props = {
   className?: string;
   text: string,
-  anime:iAnimed,
-  handlerData?(data: iAnimed) :void
+  onClick?() :void
+  type: 'button'| 'reset' | 'submit'
 }
-const ButtotWrap = styled('div')({
+const ButtonUI = styled('button')({
   cursor: 'pointer',
   background: 'white',
   position: 'absolute',
@@ -24,20 +23,24 @@ const ButtotWrap = styled('div')({
     transition: 'all 0.2s',
   },
 });
-export default function ButtonAdd({
-  className, text, anime, handlerData,
+export default function Button({
+  className, text, onClick, type,
 }: props) {
   const onClickHandler = (event: FormEvent) => {
     event.preventDefault();
-    if (handlerData !== undefined) {
-      handlerData(anime);
+    if (onClick !== undefined) {
+      onClick();
     }
   };
   return (
-    <ButtotWrap className={className} onClick={onClickHandler}>
+    <ButtonUI
+      type={type}
+      className={className}
+      onClick={onClickHandler}
+    >
       <span>
-        add to collection
+        {text}
       </span>
-    </ButtotWrap>
+    </ButtonUI>
   );
 }

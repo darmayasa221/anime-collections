@@ -2,12 +2,12 @@ import { iAnimed } from '../../animes/entities/Anime';
 
 export interface iCollectionItem {
   nameCollection: string
-  animeCollection: Array<iAnimed> | [] | any
+  animeCollection: Array<iAnimed>
 }
 export default class CollectionItem implements iCollectionItem {
   public nameCollection: string;
 
-  public animeCollection:Array<iAnimed> | [] | any;
+  public animeCollection:Array<iAnimed>;
 
   constructor(payload: iCollectionItem) {
     this.verifyPayload(payload);

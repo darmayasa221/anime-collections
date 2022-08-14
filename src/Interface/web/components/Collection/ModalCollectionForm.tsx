@@ -1,13 +1,12 @@
 /* eslint-disable react/require-default-props */
 import React, { FormEvent, useRef } from 'react';
 import { css } from '@emotion/react';
-import styled from '@emotion/styled';
-import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 type props = {
-  setModalForm: (callback:(prev: object) => any) => any,
-  handlerData: (payload: any) => any
+  setModalForm: (callback: (prev: object) => any) => any;
+  handlerData: (payload: any) => any;
 }
 const CollectionFormWrap = styled('div')({
   width: '100%',
@@ -81,7 +80,7 @@ const ButtonWrap = styled('div')({
   },
 });
 
-function CollectionForm({ setModalForm, handlerData }:props) {
+export default function Modal({ setModalForm, handlerData }:props) {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -124,13 +123,5 @@ function CollectionForm({ setModalForm, handlerData }:props) {
         </div>
       </form>
     </CollectionFormWrap>
-  );
-}
-
-export default function CollectionFormModal({ setModalForm, handlerData }:props) {
-  return (
-    <>
-      {createPortal(<CollectionForm handlerData={handlerData} setModalForm={setModalForm} />, (document.getElementById('modal-form')!))}
-    </>
   );
 }

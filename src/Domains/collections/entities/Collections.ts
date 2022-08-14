@@ -1,7 +1,7 @@
 import CollectionItem, { iCollectionItem } from './CollectionItem';
 
 export interface iCollections {
-  collections: Array<iCollectionItem> | []
+  collections: Array<iCollectionItem>
 }
 
 export default class Collections implements iCollections {

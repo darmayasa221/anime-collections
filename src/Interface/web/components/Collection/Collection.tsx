@@ -5,8 +5,11 @@ import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 import { iCollectionItem } from '../../../../Domains/collections/entities/CollectionItem';
 import defaultCover from '../../assert/default.png';
+import Button from '../UI/Button';
 
-type props = iCollectionItem
+export interface PropsCollections extends iCollectionItem {
+  type: 'addAnimeToCollection' | 'addCollectionItem'
+}
 
 const collectionNavLink = css({
   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
@@ -23,13 +26,20 @@ const collectionNavLink = css({
   },
 });
 const TitleWrap = styled('div')({
+  height: '38px',
   padding: '0 5px',
   h1: {
+    fontSize: '20px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: '-webkit-box',
     '-webkit-line-clamp': 1,
     '-webkit-box-orient': 'vertical',
+  },
+  '@media screen and (min-width: 650px)': {
+    h1: {
+      fontSize: '30px',
+    },
   },
 });
 const CollectionCoverImageWrap = styled('div')({
@@ -39,15 +49,18 @@ const CollectionCoverImageWrap = styled('div')({
     width: '100%',
   },
 });
-const ButtonWrap = styled('div')({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(2,1fr)',
-  height: '30px',
-  gap: '5px',
-  padding: '2px 5px',
-});
+const ButtonWrap = styled('div')<Pick<PropsCollections, 'type'>>(
+  {
+    gridTemplateColumns: 'repeat(2,1fr)',
+    height: '30px',
+    gap: '5px',
+    padding: '2px 5px',
+    position: 'relative',
+  },
+  ({ type }) => ({ display: type === 'addCollectionItem' ? 'grid' : 'none' }),
+);
 
-export default function Collection({ animeCollection, nameCollection }: props) {
+export default function Collection({ animeCollection, nameCollection, type }: PropsCollections) {
   return (
     <NavLink
       to={`/collection/${nameCollection}`}
@@ -69,9 +82,9 @@ export default function Collection({ animeCollection, nameCollection }: props) {
       <TitleWrap>
         <h1>{nameCollection}</h1>
       </TitleWrap>
-      <ButtonWrap>
-        <button type="submit">delete</button>
-        <button type="submit">edit</button>
+      <ButtonWrap type={type}>
+        <Button type="submit" text="Remove" />
+        <Button type="submit" text="Edit" />
       </ButtonWrap>
     </NavLink>
   );

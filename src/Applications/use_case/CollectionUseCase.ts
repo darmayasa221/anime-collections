@@ -1,12 +1,13 @@
 import { iAnimed } from '../../Domains/animes/entities/Anime';
 import { iCollectionRepository } from '../../Domains/collections/CollectionRepository';
 import CollectionItem, { iCollectionItem } from '../../Domains/collections/entities/CollectionItem';
+import { iCollections } from '../../Domains/collections/entities/Collections';
 import { iDispatcherCollection } from '../dispatcher/DispatcherCollection';
 import { iDispatcherError } from '../dispatcher/DispatcherError';
 import { iDispatcherNotification } from '../dispatcher/DispatcherNotification';
 
 export interface iCollectionUseCase {
-  addAnimeToCollection(payload: iAnimed): void
+  addAnimeToCollection(payload: iCollectionItem): void
   addCollectionItem({ nameCollection }:iCollectionItem): void
   getCollections():void
 }
@@ -37,15 +38,16 @@ export default class CollectionUseCase implements iCollectionUseCase {
     this.message;
   }
 
-  addAnimeToCollection(payload: iAnimed):void {
+  addAnimeToCollection(payload: iCollectionItem):void {
     try {
-      this.dispatcherCollection.setAnimeToCollection(payload);
-      this.message = payload.title.native;
+      const collections = this.collectionRepository.addAnimeToCollection(payload);
+      this.dispatcherCollection.setCollections(collections);
+      this.message = payload.nameCollection;
     } catch (error) {
       this.isError = true;
       this.dispatcherError.setError(error as any);
     } finally {
-      this.dispatcherNotification.setNotification({ error: this.isError, type: 'addCollectionItem', message: this.message });
+      this.dispatcherNotification.setNotification({ error: this.isError, message: this.message });
     }
   }
 
@@ -59,7 +61,7 @@ export default class CollectionUseCase implements iCollectionUseCase {
       this.isError = true;
       this.dispatcherError.setError(error as any);
     } finally {
-      this.dispatcherNotification.setNotification({ error: this.isError, type: 'addCollectionItem' });
+      this.dispatcherNotification.setNotification({ error: this.isError });
     }
   }
 
@@ -71,7 +73,7 @@ export default class CollectionUseCase implements iCollectionUseCase {
       this.isError = true;
       this.dispatcherError.setError(error as any);
     } finally {
-      this.dispatcherNotification.setNotification({ error: this.isError, type: 'addCollectionItem' });
+      this.dispatcherNotification.setNotification({ error: this.isError });
     }
   }
 }

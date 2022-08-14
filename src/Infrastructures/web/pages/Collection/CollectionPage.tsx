@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import CollectionForm from '../../../../Interface/web/components/Collection/CollectionForm';
+import CollectionForm from '../../../../Interface/web/components/Collection/ModalCollectionForm';
 import ContainerContex from '../../../store/ContainerContex';
 import CollectionList from '../../../../Interface/web/components/Collection/CollectionList';
 import CollectionsUseState from '../../../../Interface/web/models/Collections';
@@ -14,13 +14,15 @@ const CollectionHeaderWrap = styled('div')({
     fontSize: '25px',
     marginBottom: '10px',
   },
+
   button: {
     padding: '8px',
-    transition: 'all 0.3s ease',
+    transform: 'translateZ(0) scale(1)',
+    transition: 'transform .2s',
     boxShadow:
       '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-    ':active': {
-      transform: 'translateY(0.25rem)',
+    ':hover': {
+      transform: 'scale(1.05)',
     },
   },
 });
@@ -46,7 +48,6 @@ export default function CollectionPage() {
     setCollectionItem,
     setDispatcher,
   );
-  console.log(collections, _);
   useEffect(() => {
     CollectionsAction(collectionUseCase, setCollections, setDispatcher);
   }, []);
@@ -64,7 +65,7 @@ export default function CollectionPage() {
     <>
       <ContentWrap>
         <CollectionHeaderWrap>
-          <h1>test</h1>
+          <h1>Collections</h1>
           <button
             type="button"
             onClick={() => {
@@ -85,7 +86,7 @@ export default function CollectionPage() {
         )}
 
       </ContentWrap>
-      <CollectionList collections={collections.collections} />
+      <CollectionList type="addCollectionItem" collections={collections.collections} />
     </>
   );
 }

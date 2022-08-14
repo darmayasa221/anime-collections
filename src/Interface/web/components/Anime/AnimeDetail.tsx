@@ -1,13 +1,26 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { iAnimedDetail } from '../../../../Domains/animes/entities/AnimeDetail';
 import AnimeTitle from './AnimeTitle';
-import Button from '../UI/ButtonAdd';
+import Button from '../UI/Button';
 import Content from '../UI/Content';
+import Modal from '../UI/Modal';
+import ModalAddAnimeToCollection from '../Collection/ModalAddAnimeToCollection';
+import { iCollectionItem } from '../../../../Domains/collections/entities/CollectionItem';
 
 type props = {
   animeDetail: iAnimedDetail;
+  modalForm:{
+  visible: boolean,
+  handler: boolean,
+  }
+  modalFormHandler() :void
+   setModalForm: (callback: (prev: object) => any) => any;
+  handlerSetCollectionsActions():void
+  handlerData: (payload: any) => any
+  collections: Array<iCollectionItem>
 };
 const AnimeDetailWrap = styled('div')({
   width: '100%',
@@ -81,110 +94,116 @@ const ContentWrap = styled(Content)({
     top: '-30px',
   },
 });
-export default function AnimeDetail({ animeDetail }: props) {
+export default function AnimeDetail({
+  animeDetail,
+  modalForm,
+  modalFormHandler,
+  handlerSetCollectionsActions,
+  collections,
+  setModalForm,
+  handlerData,
+}: props) {
   const titleKey = Object.keys(animeDetail.title);
   return (
-    <ContentWrap>
-      <div css={css({
-        '@media screen and (min-width: 1200px)': {
-          maxWidth: '1200px',
-          position: 'relative',
-          padding: '32px',
-        },
-      })}
-      >
-        <BannerImageWrap>
-          <img
-            css={css({
-              width: '100%',
-            })}
-            src={animeDetail.bannerImage}
-            alt={animeDetail.title.native}
+    <>
+      {
+        modalForm.visible && (
+        <Modal>
+          <ModalAddAnimeToCollection
+            CollectionsAction={handlerSetCollectionsActions}
+            collections={collections}
+            handlerData={handlerData}
+            setModalForm={setModalForm}
           />
-        </BannerImageWrap>
-        <AnimeDetailWrap>
-          <CoverImageWrap
-            css={css({
-              border: `solid 5px ${animeDetail.coverImage.color}`,
-            })}
-          >
+        </Modal>
+        )
+      }
+      <ContentWrap>
+        <div css={css({
+          '@media screen and (min-width: 1200px)': {
+            maxWidth: '1200px',
+            position: 'relative',
+            padding: '32px',
+          },
+        })}
+        >
+          <BannerImageWrap>
             <img
-              css={css({
-                '@media screen and (min-width: 1200px)': {
-                  border: `solid 5px ${animeDetail.coverImage.color}`,
-                },
-              })}
-              src={animeDetail.coverImage.size.extraLarge}
+              css={css({ width: '100%' })}
+              src={animeDetail.bannerImage}
               alt={animeDetail.title.native}
             />
-          </CoverImageWrap>
-          <GenresWrap>
-            <span>
-              <h1
-                css={css`
-                  margin-bottom: 5px;
-                `}
-              >
-                genres
-              </h1>
+          </BannerImageWrap>
+          <AnimeDetailWrap>
+            <CoverImageWrap
+              css={css({ border: `solid 5px ${animeDetail.coverImage.color}` })}
+            >
+              <img
+                css={css({
+                  '@media screen and (min-width: 1200px)': {
+                    border: `solid 5px ${animeDetail.coverImage.color}`,
+                  },
+                })}
+                src={animeDetail.coverImage.size.extraLarge}
+                alt={animeDetail.title.native}
+              />
+            </CoverImageWrap>
+            <GenresWrap>
               <span>
-                {animeDetail.genres.map((genre) => (
-                  <p key={genre}>{genre}</p>
-                ))}
-                <RatingWrap>
-                  <p>
-                    ⭐️
-                    <span
-                      css={css({
-                        marginLeft: '10px',
-                      })}
-                    >
-                      {animeDetail.averageScore}
-                    </span>
-                  </p>
-                </RatingWrap>
+                <h1 css={css({ marginBottom: '5px' })}>
+                  genres
+                </h1>
+                <span>
+                  {animeDetail.genres.map((genre) => (
+                    <p key={genre}>{genre}</p>
+                  ))}
+                  <RatingWrap>
+                    <p>
+                      ⭐️
+                      <span css={css({ marginLeft: '10px' })}>
+                        {animeDetail.averageScore}
+                      </span>
+                    </p>
+                  </RatingWrap>
+                </span>
               </span>
-            </span>
-          </GenresWrap>
-        </AnimeDetailWrap>
-        <DescriptionWrap>
-          <div
-            css={css({
-              marginBottom: '10px',
-            })}
-          >
-            <div css={css({
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: '5px',
-            })}
-            >
-              <h2>Title</h2>
-              <ButtonAdd />
-            </div>
-            <TitleWrap>
-              {titleKey.map((title) => (
-                <AnimeTitle
-                  key={title}
-                  title={title}
-                  titleDescription={animeDetail.title[title]}
-                />
-              ))}
-            </TitleWrap>
-          </div>
-          <div>
-            <h2>Description</h2>
-            <p
-              css={css({
-                textAlign: 'justify',
+            </GenresWrap>
+          </AnimeDetailWrap>
+          <DescriptionWrap>
+            <div css={css({ marginBottom: '10px' })}>
+              <div css={css({
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '5px',
               })}
-            >
-              {animeDetail.description}
-            </p>
-          </div>
-        </DescriptionWrap>
-      </div>
+              >
+                <h2>Title</h2>
+                <ButtonAdd
+                  type="button"
+                  text="add to collection"
+                  onClick={modalFormHandler}
+                />
+              </div>
+              <TitleWrap>
+                {titleKey.map((title) => (
+                  <AnimeTitle
+                    key={title}
+                    title={title}
+                    titleDescription={animeDetail.title[title]}
+                  />
+                ))}
+              </TitleWrap>
+            </div>
+            <div>
+              <h2>Description</h2>
+              <p css={css({ textAlign: 'justify' })}>
+                {animeDetail.description}
+              </p>
+            </div>
+          </DescriptionWrap>
+        </div>
+      </ContentWrap>
+    </>
 
-    </ContentWrap>
   );
 }

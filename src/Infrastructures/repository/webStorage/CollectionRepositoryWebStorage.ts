@@ -56,6 +56,16 @@ export default class CollectionRepositoryWebStorage extends CollectionRepository
     return this.getCollections();
   }
 
+  addAnimeToCollection(payload: iCollectionItem): iCollections | void | [] {
+    const collections:iCollections = JSON.parse(localStorage.getItem('collections') || '');
+    const collectionItemIndex:number = collections.collections
+      .findIndex((collection) => collection.nameCollection === payload.nameCollection);
+    collections.collections[collectionItemIndex].animeCollection.push(payload.animeCollection[0]);
+    this.clearCollectionsLocalStorage();
+    localStorage.setItem('collections', JSON.stringify(collections));
+    return this.getCollections();
+  }
+
   editCollection(nameCollection: string): iCollections | void | [] {
     const collections: iCollections = JSON.parse(localStorage.getItem('collections') || '');
     collections.collections.forEach((collection) => {
