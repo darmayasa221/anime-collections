@@ -52,14 +52,16 @@ const CollectionCoverImageWrap = styled('div')({
 const ButtonWrap = styled('div')<Pick<PropsCollections, 'type'>>(
   {
     gridTemplateColumns: 'repeat(2,1fr)',
-    height: '30px',
+    height: '40px',
     gap: '5px',
     padding: '2px 5px',
     position: 'relative',
   },
   ({ type }) => ({ display: type === 'addCollectionItem' ? 'grid' : 'none' }),
 );
-
+const ButtonUI = styled(Button)({
+  position: 'unset',
+});
 export default function Collection({ animeCollection, nameCollection, type }: PropsCollections) {
   return (
     <NavLink
@@ -83,8 +85,8 @@ export default function Collection({ animeCollection, nameCollection, type }: Pr
         <h1>{nameCollection}</h1>
       </TitleWrap>
       <ButtonWrap type={type}>
-        <Button type="submit" text="Remove" />
-        <Button type="submit" text="Edit" />
+        <ButtonUI type="submit" text="Remove" />
+        <ButtonUI type="submit" text="Edit" />
       </ButtonWrap>
     </NavLink>
   );

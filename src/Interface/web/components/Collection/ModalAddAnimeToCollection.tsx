@@ -33,6 +33,8 @@ const ContentCollections = styled(Content)({
   padding: '0 10px',
   backgroundColor: 'white',
   overflow: 'hidden',
+  boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+  borderRadius: '5px',
 });
 export default function ModalAddAnimeToCollection({
   handlerData, setModalForm, collections, CollectionsAction,

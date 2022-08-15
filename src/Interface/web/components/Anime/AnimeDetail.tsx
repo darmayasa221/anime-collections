@@ -97,9 +97,9 @@ const ContentWrap = styled(Content)({
 export default function AnimeDetail({
   animeDetail,
   modalForm,
+  collections,
   modalFormHandler,
   handlerSetCollectionsActions,
-  collections,
   setModalForm,
   handlerData,
 }: props) {

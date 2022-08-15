@@ -13,7 +13,7 @@ const ButtonUI = styled('button')({
   background: 'white',
   position: 'absolute',
   right: 0,
-  borderColor: 'rgb(209 213 219)',
+  border: 'black 1px solid',
   boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
   borderRadius: '0.25rem',
   padding: '10px',

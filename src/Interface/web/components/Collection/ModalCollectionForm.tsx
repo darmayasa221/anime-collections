@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React, { FormEvent, useRef } from 'react';
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
@@ -23,7 +22,8 @@ const collectionForm = css({
   borderColor: 'rgb(209 213 219)',
   boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
   borderRadius: '0.25rem',
-  padding: '30px',
+  padding: '20px',
+  margin: '10px',
   width: '40vh',
   height: '30vh',
   backgroundColor: 'white',
@@ -51,9 +51,10 @@ const InputWrap = styled('div')({
     borderRadius: '0.25rem',
     ':hover': {
       boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-      transform: 'translateY(0.25rem)',
+      transform: 'translateY(-0.25rem)',
     },
-    ':active': {
+    ':focus': {
+      boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
       transform: 'translateY(-0.25rem)',
     },
   },
@@ -63,24 +64,34 @@ const ButtonWrap = styled('div')({
   gridTemplateColumns: '1fr 1fr',
   gridColumnGap: '10px',
   width: '50%',
+
   a: {
     margin: 'auto 0',
     textDecoration: 'none',
     color: 'black',
-    ':active': {
-      transform: 'translateY(0.25rem)',
-    },
-  },
-  input: {
-    transition: 'all 0.3s ease',
-    boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-    ':active': {
-      transform: 'translateY(0.25rem)',
+    transition: 'all 0.2s',
+    ':hover': {
+      transform: 'scale(1.1)',
+      transition: 'all 0.2s',
     },
   },
 });
 
-export default function Modal({ setModalForm, handlerData }:props) {
+const ButtonUI = styled('button')({
+  cursor: 'pointer',
+  background: 'white',
+  right: 0,
+  border: 'black 1px solid',
+  boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+  borderRadius: '0.25rem',
+  padding: '10px',
+  transition: 'all 0.2s',
+  ':hover': {
+    transform: 'scale(1.1)',
+    transition: 'all 0.2s',
+  },
+});
+export default function ModalCollectionForm({ setModalForm, handlerData }:props) {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
@@ -108,7 +119,9 @@ export default function Modal({ setModalForm, handlerData }:props) {
         })}
         >
           <ButtonWrap>
-            <input type="submit" />
+            <ButtonUI type="submit">
+              Submit
+            </ButtonUI>
             <Link
               to="/collection"
               onClick={

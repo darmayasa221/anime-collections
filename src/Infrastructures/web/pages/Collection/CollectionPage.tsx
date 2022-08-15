@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import CollectionForm from '../../../../Interface/web/components/Collection/ModalCollectionForm';
 import ContainerContex from '../../../store/ContainerContex';
 import CollectionList from '../../../../Interface/web/components/Collection/CollectionList';
 import CollectionsUseState from '../../../../Interface/web/models/Collections';
 import CollectionItemUseState from '../../../../Interface/web/models/CollectionItem';
 import CollectionItemAction from '../../../../Interface/web/controllers/CollectionItem';
 import CollectionsAction from '../../../../Interface/web/controllers/Collections';
+import ModalCollectionForm from '../../../../Interface/web/components/Collection/ModalCollectionForm';
+import Modal from '../../../../Interface/web/components/UI/Modal';
+import Button from '../../../../Interface/web/components/UI/Button';
 
 const CollectionHeaderWrap = styled('div')({
   h1: {
@@ -14,17 +16,9 @@ const CollectionHeaderWrap = styled('div')({
     fontSize: '25px',
     marginBottom: '10px',
   },
-
-  button: {
-    padding: '8px',
-    transform: 'translateZ(0) scale(1)',
-    transition: 'transform .2s',
-    boxShadow:
-      '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-    ':hover': {
-      transform: 'scale(1.05)',
-    },
-  },
+});
+const ButtonUI = styled(Button)({
+  position: 'unset',
 });
 const ContentWrap = styled('div')({
   width: '100%',
@@ -66,7 +60,7 @@ export default function CollectionPage() {
       <ContentWrap>
         <CollectionHeaderWrap>
           <h1>Collections</h1>
-          <button
+          <ButtonUI
             type="button"
             onClick={() => {
               setModalForm({
@@ -74,15 +68,16 @@ export default function CollectionPage() {
                 handler: false,
               });
             }}
-          >
-            Add a Collection
-          </button>
+            text="Add a Collection"
+          />
         </CollectionHeaderWrap>
         {modalForm.visible && (
-        <CollectionForm
-          handlerData={addCollectionItemAction}
-          setModalForm={setModalForm}
-        />
+          <Modal>
+            <ModalCollectionForm
+              handlerData={addCollectionItemAction}
+              setModalForm={setModalForm}
+            />
+          </Modal>
         )}
 
       </ContentWrap>
