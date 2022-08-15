@@ -1,120 +1,62 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { iAnimedDetail } from '../../../../Domains/animes/entities/AnimeDetail';
 import AnimeTitle from './AnimeTitle';
+import Button from '../UI/Button';
+import Content from '../UI/Content';
+import Modal from '../UI/Modal';
+import ModalAddAnimeToCollection from '../Collection/ModalAddAnimeToCollection';
+import { iCollectionItem } from '../../../../Domains/collections/entities/CollectionItem';
 
 type props = {
   animeDetail: iAnimedDetail;
+  modalForm:{
+  visible: boolean,
+  handler: boolean,
+  }
+  modalFormHandler() :void
+   setModalForm: (callback: (prev: object) => any) => any;
+  handlerSetCollectionsActions():void
+  handlerData: (payload: any) => any
+  collections: Array<iCollectionItem>
 };
 const AnimeDetailWrap = styled('div')({
-  maxHeight: '1200px',
-  '@media screen and (min-width: 1200px)': {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'center',
-    '> div:nth-of-type(1)': {
-      top: 0,
-      position: 'absolute',
-      width: '1200px',
-    },
-  },
+  width: '100%',
+  overflow: 'hidden',
+  position: 'relative',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2,1fr)',
+  marginTop: '50px',
+  marginBottom: '20px',
 });
 const BannerImageWrap = styled('div')({
   position: 'absolute',
-  right: 0,
+  left: 0,
   top: 0,
-  img: {
-    width: '100%',
-    maxHeight: '120px',
-  },
-  '@media screen and (min-width: 650px)': {
-    img: {
-      maxHeight: '260px',
-    },
-  },
-  '@media screen and (min-width: 850px)': {
-    // img: {
-    //   maxHeight: '0px',
-    // },
-  },
-  '@media screen and (min-width: 1000px)': {
-    img: {
-      maxHeight: '370px',
-    },
-  },
-  // '@media screen and (min-width: 1200px)': {
-  //   img: {
-  //     width: '100%',
-  //     maxHeight: '120px',
-  //   },
-  // },
 });
 const CoverImageWrap = styled('div')({
-  position: 'relative',
-  height: '40vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignContent: 'center',
   img: {
-    height: '90%',
-    width: '50%',
-    position: 'absolute',
+    width: '100%',
   },
-  '@media screen and (min-width: 650px)': {
-    height: '45vh',
-    marginTop: '10%',
+  '@media screen and (min-width: 1024px)': {
+    border: 'none',
     img: {
-      height: '95%',
-    },
-  },
-  '@media screen and (min-width: 850px)': {
-    marginBottom: '20px',
-    height: '50vh',
-    img: {
-      height: '100%',
-    },
-  },
-  '@media screen and (min-width: 1000px)': {
-    marginBottom: '20px',
-    height: '55vh',
-    img: {
-      height: '100%',
-    },
-  },
-  '@media screen and (min-width: 1200px)': {
-    marginBottom: '20px',
-    maxHeight: '560px',
-    img: {
-      maxHeight: '560px',
-      marginLeft: '20px',
+      width: 'auto',
     },
   },
 });
 const GenresWrap = styled('div')({
-  display: 'grid',
-  position: 'absolute',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-  width: '100%',
-  height: '30vh',
-  paddingTop: '30%',
-  gridColumnGap: '40px',
-  '@media screen and (min-width: 650px)': {
-    paddingTop: '25%',
-    gridColumnGap: '60px',
-    'span:nth-of-type(2)': {
-      paddingTop: '25px',
-      paddingLeft: '20px',
-    },
-    h1: {
-      marginBottom: '10px',
-      fontSize: '30px',
-    },
-    p: {
-      fontSize: '20px',
-    },
-  },
+  display: 'flex',
+  alignItems: 'end',
+  marginLeft: '20px',
 });
 const RatingWrap = styled('div')({
   backgroundColor: 'black',
-  width: '40%',
   color: 'wheat',
   marginTop: '5px',
   padding: '2px',
@@ -134,91 +76,134 @@ const TitleWrap = styled('div')({
   gridTemplateColumns: '1fr 2fr',
   gridColumnGap: '10px',
 });
-export default function AnimeDetail({ animeDetail }: props) {
+const ButtonAdd = styled(Button)({
+  marginLeft: '20px',
+  position: 'unset',
+  padding: '2px 5px',
+  border: '1px black solid',
+  boxShadow: 'none',
+});
+const ContentWrap = styled(Content)({
+  margin: 0,
+  position: 'unset',
+  '@media screen and (min-width: 1200px)': {
+    position: 'relative',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    top: '-30px',
+  },
+});
+export default function AnimeDetail({
+  animeDetail,
+  modalForm,
+  collections,
+  modalFormHandler,
+  handlerSetCollectionsActions,
+  setModalForm,
+  handlerData,
+}: props) {
   const titleKey = Object.keys(animeDetail.title);
   return (
-    <AnimeDetailWrap>
-      <div>
-        <BannerImageWrap>
-          <img
-            css={css`
-              width: 100%;
-            `}
-            src={animeDetail.bannerImage}
-            alt={animeDetail.title.native}
+    <>
+      {
+        modalForm.visible && (
+        <Modal>
+          <ModalAddAnimeToCollection
+            CollectionsAction={handlerSetCollectionsActions}
+            collections={collections}
+            handlerData={handlerData}
+            setModalForm={setModalForm}
           />
-        </BannerImageWrap>
-        <CoverImageWrap>
-          <img
-            css={css`
-              border: solid 5px ${animeDetail.coverImage.color};
-            `}
-            src={animeDetail.coverImage.size.extraLarge}
-            alt={animeDetail.title.native}
-          />
-          <GenresWrap>
-            <span />
-            <span
-              css={css`
-                padding-top: 10px;
-              `}
+        </Modal>
+        )
+      }
+      <ContentWrap>
+        <div css={css({
+          '@media screen and (min-width: 1200px)': {
+            maxWidth: '1200px',
+            position: 'relative',
+            padding: '32px',
+          },
+        })}
+        >
+          <BannerImageWrap>
+            <img
+              css={css({ width: '100%' })}
+              src={animeDetail.bannerImage}
+              alt={animeDetail.title.native}
+            />
+          </BannerImageWrap>
+          <AnimeDetailWrap>
+            <CoverImageWrap
+              css={css({ border: `solid 5px ${animeDetail.coverImage.color}` })}
             >
-              <h1
-                css={css`
-                  margin-bottom: 5px;
-                `}
-              >
-                genres
-              </h1>
+              <img
+                css={css({
+                  '@media screen and (min-width: 1200px)': {
+                    border: `solid 5px ${animeDetail.coverImage.color}`,
+                  },
+                })}
+                src={animeDetail.coverImage.size.extraLarge}
+                alt={animeDetail.title.native}
+              />
+            </CoverImageWrap>
+            <GenresWrap>
               <span>
-                {animeDetail.genres.map((genre) => (
-                  <p key={genre}>{genre}</p>
-                ))}
-                <RatingWrap>
-                  <p>
-                    ⭐️
-                    <span
-                      css={css`
-                        margin-left: 10px;
-                      `}
-                    >
-                      {animeDetail.averageScore}
-                    </span>
-                  </p>
-                </RatingWrap>
+                <h1 css={css({ marginBottom: '5px' })}>
+                  genres
+                </h1>
+                <span>
+                  {animeDetail.genres.map((genre) => (
+                    <p key={genre}>{genre}</p>
+                  ))}
+                  <RatingWrap>
+                    <p>
+                      ⭐️
+                      <span css={css({ marginLeft: '10px' })}>
+                        {animeDetail.averageScore}
+                      </span>
+                    </p>
+                  </RatingWrap>
+                </span>
               </span>
-            </span>
-          </GenresWrap>
-        </CoverImageWrap>
-        <DescriptionWrap>
-          <div
-            css={css`
-              margin-bottom: 10px;
-            `}
-          >
-            <h2>Title</h2>
-            <TitleWrap>
-              {titleKey.map((title) => (
-                <AnimeTitle
-                  key={title}
-                  title={title}
-                  titleDescription={animeDetail.title[title]}
+            </GenresWrap>
+          </AnimeDetailWrap>
+          <DescriptionWrap>
+            <div css={css({ marginBottom: '10px' })}>
+              <div css={css({
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '5px',
+              })}
+              >
+                <h2>Title</h2>
+                <ButtonAdd
+                  type="button"
+                  text="add to collection"
+                  onClick={modalFormHandler}
                 />
-              ))}
-            </TitleWrap>
-          </div>
-          <div>
-            <h2>Description</h2>
-            <p
-              css={css`
-                text-align: justify;
-              `}
-            >
-              {animeDetail.description}
-            </p>
-          </div>
-        </DescriptionWrap>
-      </div>
-    </AnimeDetailWrap>
+              </div>
+              <TitleWrap>
+                {titleKey.map((title) => (
+                  <AnimeTitle
+                    key={title}
+                    title={title}
+                    titleDescription={animeDetail.title[title]}
+                  />
+                ))}
+              </TitleWrap>
+            </div>
+            <div>
+              <h2>Description</h2>
+              <p css={css({ textAlign: 'justify' })}>
+                {animeDetail.description}
+              </p>
+            </div>
+          </DescriptionWrap>
+        </div>
+      </ContentWrap>
+    </>
+
   );
 }

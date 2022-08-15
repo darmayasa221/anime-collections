@@ -11,13 +11,13 @@ export default function AnimePage() {
   const [animes, setAnimes] = AnimesUseState();
   const [_, setCollectionItem] = CollectionItemUseState();
   const { getAnimesUseCase, collectionUseCase, setDispatcher } = useContext(ContainerContex);
-  const { addAnimeToCollectionAction } = CollectionAction(
+  const { addCollectionItem } = CollectionAction(
     collectionUseCase,
     setCollectionItem,
     setDispatcher,
   );
   const addAnimeCollectionHandler = (data: iAnimed) => {
-    addAnimeToCollectionAction(data);
+    addCollectionItem(data);
   };
   useEffect(() => {
     animes.isLoading && AnimesAction(getAnimesUseCase, setAnimes, setDispatcher);

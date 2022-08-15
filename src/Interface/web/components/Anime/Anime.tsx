@@ -13,17 +13,16 @@ type props = {
 };
 
 const animeNavLink = css({
-  position: 'relative',
   width: '100%',
   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
   backgroundColor: 'white',
   borderRadius: '8px',
   overflow: 'hidden',
-  display: 'block',
   color: 'black',
   textDecoration: 'unset',
   transition: 'all 0.2s',
   ':hover': {
+    zIndex: 2,
     transform: 'scale(1.1)',
     transition: 'all 0.2s',
   },
@@ -41,8 +40,10 @@ const TitleWrap = styled('div')({
   },
 });
 const AnimeCoverImageWrap = styled('div')({
+  overflow: 'hidden',
+  position: 'relative',
   img: {
-    width: '100%',
+    width: '105%',
   },
 });
 

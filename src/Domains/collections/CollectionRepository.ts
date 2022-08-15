@@ -2,6 +2,7 @@ import { iCollectionItem } from './entities/CollectionItem';
 import { iCollections } from './entities/Collections';
 
 export interface iCollectionRepository {
+  addAnimeToCollection(payload: iCollectionItem): iCollections
   addCollection (payload: iCollectionItem): void
   editCollection (nameCollection: string): iCollections
   deleteCollection(nameColletion: string): iCollections
@@ -26,6 +27,10 @@ export default abstract class CollectionRepository implements iCollectionReposit
   }
 
   getCollectionDetail(nameCollection: string): any {
+    throw new Error('COLLECTION_REPOSITORY.METHOD_NOT_IMLEMENTED');
+  }
+
+  addAnimeToCollection(payload: iCollectionItem): any {
     throw new Error('COLLECTION_REPOSITORY.METHOD_NOT_IMLEMENTED');
   }
 }

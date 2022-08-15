@@ -19,6 +19,10 @@ export default class DispatcherCollectionSetState extends DispatcherCollection {
   }
 
   setCollections(payload: iCollections):void {
-    this.dispatch.setCollections((prev) => ({ ...prev, ...payload }));
+    this.dispatch.setCollections((prev) => (
+      {
+        ...prev,
+        ...payload,
+      }));
   }
 }

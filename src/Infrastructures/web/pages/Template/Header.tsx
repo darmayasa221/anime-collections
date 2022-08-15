@@ -7,9 +7,9 @@ import Notification from '../../../../Interface/web/components/UI/Notification';
 import { NotificationContext } from '../../../store/NotificationsContex';
 
 const HeaderApp = styled('header')({
+  padding: '23px',
   position: 'sticky',
   top: 0,
-  height: '8vh',
   alignItems: 'center',
   backgroundColor: '#44dc8f',
   display: 'flex',
@@ -21,6 +21,7 @@ const HeaderApp = styled('header')({
     fontSize: '24px',
   },
   '@media screen and (min-width: 650px)': {
+    padding: '12px',
     h1: {
       fontSize: '40px',
     },
